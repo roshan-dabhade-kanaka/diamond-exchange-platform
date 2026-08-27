@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
 import { DataTable, GhostButton, PageHeader, Panel } from "@/components/adex/kit";
+import { BIDDING_WINDOW_DAYS, PAYMENT_LOCK_HOURS } from "@/lib/rules";
 
 export const Route = createFileRoute("/admin/config")({
   head: pageHead(
@@ -32,6 +33,11 @@ const groups: { title: string; intro: string; settings: Setting[] }[] = [
         explain: "Whether buyers can see the minimum price a seller will accept.",
         value: "Hidden",
       },
+      {
+        name: "Bidding window",
+        explain: "How long a listing accepts bids after it goes live.",
+        value: `${BIDDING_WINDOW_DAYS} days`,
+      },
     ],
   },
   {
@@ -51,7 +57,7 @@ const groups: { title: string; intro: string; settings: Setting[] }[] = [
       {
         name: "Payment window for buyers",
         explain: "How long a buyer has to pay after winning before the sale is at risk.",
-        value: "4 days",
+        value: `${PAYMENT_LOCK_HOURS} hours`,
       },
       {
         name: "Seller payout time",

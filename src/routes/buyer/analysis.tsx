@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
 import {
@@ -8,8 +9,10 @@ import {
   GoldButton,
   PageHeader,
   Panel,
+  StatusBadge,
 } from "@/components/adex/kit";
 import type { Row } from "@/lib/adex-data";
+import { useSession } from "@/lib/session";
 
 export const Route = createFileRoute("/buyer/analysis")({
   head: pageHead(
@@ -61,7 +64,22 @@ const tiers = [
   },
 ];
 
+const cuttingPlans = [
+  {
+    name: "Yield estimate",
+    price: "$180",
+    detail: "AI cut-and-yield projection from existing scan data — no new scan required.",
+  },
+  {
+    name: "Cutting plan + report",
+    price: "$520",
+    detail: "Full cutting option analysis with polished-yield modelling and a signed plan.",
+  },
+];
+
 function AnalysisPage() {
+  const { isCleared } = useSession();
+
   return (
     <>
       <PageHeader
@@ -69,13 +87,27 @@ function AnalysisPage() {
         description="Most desks carry portable machines for a quick read. Order a paid analysis when you want an independent, documented opinion before payment."
       />
 
+      {!isCleared ? (
+        <div className="adex-panel mb-6 border-l-4 border-warning bg-warning/10 p-4">
+          <p className="text-sm font-semibold">
+            Paid Analysis and Cutting Plans are available once your KYC/AML and eligibility review are
+            approved.
+          </p>
+          <Link to="/buyer/kyc" className="adex-link mt-1 inline-block text-sm">
+            Review KYC / AML status →
+          </Link>
+        </div>
+      ) : null}
+
       <div className="mb-6 grid gap-3 md:grid-cols-3">
         {tiers.map((t) => (
           <div key={t.name} className="adex-panel flex flex-col gap-2 p-4">
             <p className="adex-eyebrow">{t.name}</p>
             <p className="font-display text-2xl">{t.price}</p>
             <p className="text-sm text-muted-foreground">{t.detail}</p>
-            <GhostButton className="mt-auto self-start">Select</GhostButton>
+            <GhostButton className="mt-auto self-start" type="button" disabled={!isCleared}>
+              Select
+            </GhostButton>
           </div>
         ))}
       </div>
@@ -93,8 +125,12 @@ function AnalysisPage() {
             ]}
           />
           <div className="mt-5 flex flex-wrap gap-2">
-            <GoldButton>Pay and submit</GoldButton>
-            <GhostButton>Add to a showroom visit</GhostButton>
+            <GoldButton type="button" disabled={!isCleared}>
+              Pay and submit
+            </GoldButton>
+            <GhostButton type="button" disabled={!isCleared}>
+              Add to a showroom visit
+            </GhostButton>
           </div>
         </Panel>
 
@@ -116,6 +152,32 @@ function AnalysisPage() {
             </Link>
             .
           </p>
+        </Panel>
+      </div>
+
+      <div className="mt-6">
+        <Panel title="AI Cutting & Yield Plans">
+          <p className="mb-4 max-w-2xl text-sm text-muted-foreground">
+            A separate service from lab verification above: order an AI-modelled cutting and yield
+            plan for a rough stone. Unlike lab analysis, the plan fee is{" "}
+            <strong>credited against your final invoice</strong> if the stone is cut through ADEX's
+            partner network — you only pay the difference.
+          </p>
+          <div className="grid gap-3 md:grid-cols-2">
+            {cuttingPlans.map((p) => (
+              <div key={p.name} className="adex-panel flex flex-col gap-2 p-4">
+                <div className="flex items-center justify-between">
+                  <p className="adex-eyebrow">{p.name}</p>
+                  <StatusBadge value="Credited if cut with ADEX" />
+                </div>
+                <p className="font-display text-2xl">{p.price}</p>
+                <p className="text-sm text-muted-foreground">{p.detail}</p>
+                <GoldButton className="mt-auto self-start" type="button" disabled={!isCleared}>
+                  Order plan
+                </GoldButton>
+              </div>
+            ))}
+          </div>
         </Panel>
       </div>
 
