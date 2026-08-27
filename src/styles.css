@@ -1,0 +1,573 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ADEX design system — mirrors the ADEX marketplace theme:
+ * light neutral surfaces, gold brand wordmark, slate-blue links,
+ * slab-serif headings and a humanist sans for body copy.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 10px);
+  --radius-3xl: calc(var(--radius) + 14px);
+  --radius-4xl: calc(var(--radius) + 18px);
+
+  --font-display: var(--display-family);
+  --font-sans: var(--sans-family);
+
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-link: var(--link);
+  --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-neutral-chip: var(--neutral-chip);
+  --color-neutral-chip-foreground: var(--neutral-chip-foreground);
+  --color-maison-ivory: var(--maison-ivory);
+  --color-maison-emerald: var(--maison-emerald);
+  --color-showcase: var(--showcase);
+  --color-showcase-foreground: var(--showcase-foreground);
+  --color-showcase-muted: var(--showcase-muted);
+  --color-adex-olive: var(--adex-olive);
+  --color-adex-emerald: var(--adex-emerald);
+  --color-adex-crimson: var(--adex-crimson);
+  --color-adex-ink: var(--adex-ink);
+  --color-adex-blush: var(--adex-blush);
+  --color-adex-sky: var(--adex-sky);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-panel: none;
+  --shadow-lift: 0 24px 60px -32px oklch(0 0 0 / 0.28);
+}
+
+/*
+ * Tiffany-inspired palette: gallery white, ink-black type,
+ * signature robin's-egg blue as the single accent, hairline rules.
+ */
+:root {
+  --radius: 0rem;
+  --display-family: "Cormorant Garamond", "Times New Roman", serif;
+  --sans-family: "Karla", system-ui, sans-serif;
+  --hero-overlay: linear-gradient(180deg, oklch(0 0 0 / 0.15), oklch(0 0 0 / 0.62));
+  --nav-tracking: 0.22em;
+
+
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.17 0.003 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.17 0.003 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.17 0.003 260);
+
+  --primary: oklch(0.17 0.003 260);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.972 0.002 240);
+  --secondary-foreground: oklch(0.25 0.003 260);
+  --muted: oklch(0.968 0.003 200);
+  --muted-foreground: oklch(0.52 0.006 250);
+  --accent: oklch(0.945 0.038 186);
+  --accent-foreground: oklch(0.28 0.04 200);
+  --destructive: oklch(0.52 0.16 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.004 240);
+  --input: oklch(0.86 0.004 240);
+  --ring: oklch(0.82 0.083 186);
+
+  /* "gold" is the legacy accent token — now the signature blue. */
+  --gold: oklch(0.84 0.083 186);
+  --gold-foreground: oklch(0.19 0.02 200);
+  --link: oklch(0.17 0.003 260);
+  --panel: oklch(0.977 0.006 200);
+  --panel-foreground: oklch(0.3 0.005 250);
+
+  --success: oklch(0.5 0.09 165);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.85 0.09 90);
+  --warning-foreground: oklch(0.28 0.04 90);
+  --info: oklch(0.84 0.083 186);
+  --info-foreground: oklch(0.19 0.02 200);
+  --neutral-chip: oklch(0.94 0.004 240);
+  --neutral-chip-foreground: oklch(0.32 0.005 250);
+  --maison-ivory: oklch(0.99 0.006 95);
+  --maison-emerald: oklch(0.24 0.052 167);
+  --showcase: oklch(0.18 0.035 245);
+  --showcase-foreground: oklch(0.98 0.006 220);
+  --showcase-muted: oklch(0.82 0.018 220);
+  --adex-olive: oklch(0.58 0.045 100);
+  --adex-emerald: oklch(0.66 0.15 168);
+  --adex-crimson: oklch(0.58 0.21 14);
+  --adex-ink: oklch(0.19 0.004 90);
+  --adex-blush: oklch(0.94 0.03 350);
+  --adex-sky: oklch(0.92 0.035 235);
+
+  --chart-1: oklch(0.84 0.083 186);
+  --chart-2: oklch(0.17 0.003 260);
+  --chart-3: oklch(0.62 0.05 200);
+  --chart-4: oklch(0.5 0.09 165);
+  --chart-5: oklch(0.72 0.06 60);
+
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.25 0.004 260);
+  --sidebar-primary: oklch(0.17 0.003 260);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.955 0.033 186);
+  --sidebar-accent-foreground: oklch(0.2 0.02 200);
+  --sidebar-border: oklch(0.9 0.004 240);
+  --sidebar-ring: oklch(0.82 0.083 186);
+}
+
+/* ── Theme 2: "Maison Vert" — Graff-inspired emerald salon ───────────── */
+:root,
+[data-theme="emerald"] {
+  --display-family: "Cormorant Garamond", "Times New Roman", serif;
+  --sans-family: "Karla", system-ui, sans-serif;
+  --nav-tracking: 0.3em;
+  --hero-overlay: linear-gradient(180deg, oklch(0.2 0.06 165 / 0.25), oklch(0.16 0.05 165 / 0.8));
+
+  --background: oklch(0.19 0.037 168);
+  --foreground: oklch(0.96 0.008 100);
+  --card: oklch(0.23 0.038 168);
+  --card-foreground: oklch(0.96 0.008 100);
+  --popover: oklch(0.23 0.038 168);
+  --popover-foreground: oklch(0.96 0.008 100);
+
+  --primary: oklch(0.83 0.09 88);
+  --primary-foreground: oklch(0.2 0.04 168);
+  --secondary: oklch(0.26 0.038 168);
+  --secondary-foreground: oklch(0.95 0.008 100);
+  --muted: oklch(0.26 0.035 168);
+  --muted-foreground: oklch(0.78 0.02 130);
+  --accent: oklch(0.28 0.045 168);
+  --accent-foreground: oklch(0.88 0.08 88);
+  --destructive: oklch(0.58 0.16 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.83 0.09 88 / 26%);
+  --input: oklch(0.83 0.09 88 / 34%);
+  --ring: oklch(0.83 0.09 88);
+
+  --gold: oklch(0.83 0.09 88);
+  --gold-foreground: oklch(0.2 0.04 168);
+  --link: oklch(0.9 0.05 88);
+  --panel: oklch(0.22 0.038 168);
+  --panel-foreground: oklch(0.94 0.008 100);
+
+  --success: oklch(0.72 0.11 160);
+  --success-foreground: oklch(0.18 0.04 168);
+  --warning: oklch(0.83 0.11 80);
+  --warning-foreground: oklch(0.22 0.04 80);
+  --info: oklch(0.8 0.06 200);
+  --info-foreground: oklch(0.18 0.04 200);
+  --neutral-chip: oklch(0.28 0.038 168);
+  --neutral-chip-foreground: oklch(0.94 0.01 100);
+  --maison-ivory: oklch(0.99 0.006 95);
+  --maison-emerald: oklch(0.24 0.052 167);
+  --showcase: oklch(0.18 0.035 245);
+  --showcase-foreground: oklch(0.98 0.006 220);
+  --showcase-muted: oklch(0.82 0.018 220);
+}
+
+/* ── Salon surface: ivory working surfaces with emerald ink and gilt accents.
+   Used for the buyer/admin portal bodies so the inner pages echo the
+   ivory + emerald + gold pairing of the landing page. ─────────────────── */
+[data-surface="salon"] {
+  --background: oklch(0.98 0.008 95);
+  --foreground: oklch(0.22 0.045 168);
+  --card: oklch(1 0.003 95);
+  --card-foreground: oklch(0.22 0.045 168);
+  --popover: oklch(1 0.003 95);
+  --popover-foreground: oklch(0.22 0.045 168);
+
+  --primary: oklch(0.24 0.052 167);
+  --primary-foreground: oklch(0.98 0.008 95);
+  --secondary: oklch(0.955 0.012 95);
+  --secondary-foreground: oklch(0.24 0.052 167);
+  --muted: oklch(0.955 0.012 95);
+  --muted-foreground: oklch(0.45 0.03 168);
+  --accent: oklch(0.94 0.028 120);
+  --accent-foreground: oklch(0.24 0.052 167);
+  --destructive: oklch(0.52 0.16 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.24 0.052 167 / 18%);
+  --input: oklch(0.24 0.052 167 / 26%);
+  --ring: oklch(0.66 0.09 88);
+
+  --gold: oklch(0.72 0.1 88);
+  --gold-foreground: oklch(0.2 0.04 168);
+  --link: oklch(0.3 0.06 167);
+  --panel: oklch(0.965 0.012 95);
+  --panel-foreground: oklch(0.26 0.045 168);
+
+  --success: oklch(0.52 0.11 160);
+  --success-foreground: oklch(0.99 0.006 95);
+  --warning: oklch(0.78 0.11 80);
+  --warning-foreground: oklch(0.24 0.04 80);
+  --info: oklch(0.6 0.06 200);
+  --info-foreground: oklch(0.99 0.006 95);
+
+  /* Utilities reference the theme-level --color-* vars, which resolve at :root,
+     so re-point them here as well. */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-link: var(--link);
+  --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-neutral-chip: var(--neutral-chip);
+  --color-neutral-chip-foreground: var(--neutral-chip-foreground);
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+
+.dark {
+  --background: oklch(0.15 0.004 240);
+  --foreground: oklch(0.96 0.002 240);
+  --card: oklch(0.19 0.005 240);
+  --card-foreground: oklch(0.96 0.002 240);
+  --popover: oklch(0.19 0.005 240);
+  --popover-foreground: oklch(0.96 0.002 240);
+  --primary: oklch(0.84 0.083 186);
+  --primary-foreground: oklch(0.16 0.02 200);
+  --secondary: oklch(0.24 0.006 240);
+  --secondary-foreground: oklch(0.96 0.002 240);
+  --muted: oklch(0.24 0.006 240);
+  --muted-foreground: oklch(0.72 0.005 240);
+  --accent: oklch(0.28 0.03 195);
+  --accent-foreground: oklch(0.9 0.06 186);
+  --destructive: oklch(0.6 0.17 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(1 0 0 / 14%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: oklch(0.84 0.083 186);
+  --gold: oklch(0.84 0.083 186);
+  --gold-foreground: oklch(0.16 0.02 200);
+  --link: oklch(0.9 0.04 186);
+  --panel: oklch(0.2 0.006 240);
+  --panel-foreground: oklch(0.9 0.003 240);
+  --neutral-chip: oklch(0.28 0.006 240);
+  --neutral-chip-foreground: oklch(0.92 0.003 240);
+  --sidebar: oklch(0.18 0.005 240);
+  --sidebar-foreground: oklch(0.92 0.002 240);
+  --sidebar-accent: oklch(0.28 0.03 195);
+  --sidebar-accent-foreground: oklch(0.9 0.06 186);
+  --sidebar-border: oklch(1 0 0 / 14%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    color: var(--color-foreground);
+  }
+}
+
+@utility adex-link {
+  color: var(--color-link);
+  font-weight: 500;
+  text-underline-offset: 4px;
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+}
+
+@utility adex-panel {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-panel);
+}
+
+/* Small uppercase label, the couture-catalogue voice. */
+@utility adex-eyebrow {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+@utility adex-section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+@utility adex-rule {
+  border-bottom: 1px solid var(--color-border);
+}
+
+@utility adex-hero-overlay {
+  background-image: var(--hero-overlay);
+}
+
+@utility adex-nav {
+  font-size: 0.6875rem;
+  letter-spacing: var(--nav-tracking);
+  text-transform: uppercase;
+}
+
+/* Editorial media tile: slow zoom + hairline frame on hover. */
+@utility adex-tile {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-panel);
+  & img {
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover img {
+    transform: scale(1.06);
+  }
+}
+
+@utility adex-reveal {
+  animation: adex-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes adex-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility adex-shine {
+  background-image: linear-gradient(
+    100deg,
+    transparent 20%,
+    color-mix(in oklab, var(--color-gold) 55%, transparent) 50%,
+    transparent 80%
+  );
+  background-size: 200% 100%;
+  animation: adex-shine-sweep 6s linear infinite;
+}
+
+@keyframes adex-shine-sweep {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+/* Text sitting on top of full-bleed imagery is always light, in every theme. */
+@utility adex-on-media {
+  color: oklch(0.99 0 0);
+}
+
+@utility adex-on-media-soft {
+  color: oklch(0.99 0 0 / 0.78);
+}
+
+/* ---------- Landing "wow" utilities ---------- */
+
+/* Slow cinematic drift on hero imagery. */
+@utility adex-kenburns {
+  animation: adex-kenburns-drift 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes adex-kenburns-drift {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.16) translate3d(-1.5%, -2%, 0);
+  }
+}
+
+/* Curtain wipe used for split-screen image reveals. */
+@utility adex-curtain {
+  animation: adex-curtain-open 1400ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes adex-curtain-open {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Line-by-line typographic reveal: wrap text in .adex-mask > span. */
+@utility adex-mask {
+  display: block;
+  overflow: hidden;
+  & > span {
+    display: block;
+    animation: adex-mask-up 1200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes adex-mask-up {
+  from {
+    transform: translateY(105%) rotate(2deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Gentle levitation for framed stones. */
+@utility adex-float {
+  animation: adex-float-drift 9s ease-in-out infinite alternate;
+}
+
+@keyframes adex-float-drift {
+  from {
+    transform: translateY(-8px);
+  }
+  to {
+    transform: translateY(8px);
+  }
+}
+
+/* Gilt inner frame, Winston/Cartier register. */
+@utility adex-gilt {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 1.25rem;
+    border: 1px solid color-mix(in oklab, var(--color-gold) 60%, transparent);
+    pointer-events: none;
+  }
+}
+
+/* Vertical lockup text. */
+@utility adex-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Radiant halo behind a hero stone. */
+@utility adex-halo {
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in oklab, var(--color-gold) 26%, transparent) 0%,
+    transparent 62%
+  );
+  animation: adex-halo-pulse 7s ease-in-out infinite alternate;
+}
+
+@keyframes adex-halo-pulse {
+  from {
+    opacity: 0.5;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adex-kenburns,
+  .adex-float,
+  .adex-halo,
+  .adex-curtain,
+  .adex-mask > span,
+  .adex-reveal {
+    animation: none !important;
+  }
+}
