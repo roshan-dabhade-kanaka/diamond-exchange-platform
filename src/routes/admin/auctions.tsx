@@ -23,7 +23,13 @@ export const Route = createFileRoute("/admin/auctions")({
 });
 
 const unsoldItems: Row[] = [
-  { Lot: "ADX-S-04371", Auction: "AUC-2026-07-C", "Start Price": "$240,000", Bids: 0, Status: "Unsold" },
+  {
+    Lot: "ADX-S-04371",
+    Auction: "AUC-2026-07-C",
+    "Start Price": "$240,000",
+    Bids: 0,
+    Status: "Unsold",
+  },
 ];
 
 function AdminAuctions() {
@@ -105,7 +111,10 @@ function AdminAuctions() {
               const startPrice = Number(String(item["Start Price"]).replace(/[^0-9]/g, ""));
               const newPrice = Math.round(startPrice * (1 - RELIST_DISCOUNT_PERCENT / 100));
               return (
-                <div key={lotId} className="flex items-center justify-between border border-border p-3">
+                <div
+                  key={lotId}
+                  className="flex items-center justify-between border border-border p-3"
+                >
                   <div>
                     <p className="text-sm font-semibold">
                       {lotId} — {String(item["Auction"])}
@@ -136,8 +145,16 @@ function AdminAuctions() {
               { label: "Auction ends", detail: "AUC-2026-07-C closed 28 Jul", done: true },
               { label: "Unsold", detail: "1 lot, 6 stones", done: true },
               { label: "Review", detail: "Operations assessment", done: true },
-              { label: "Revaluation", detail: "Price reduced 10% for relisting", done: relisted.size > 0 },
-              { label: "Relist", detail: "Assigned to the next auction cycle", done: relisted.size > 0 },
+              {
+                label: "Revaluation",
+                detail: "Price reduced 10% for relisting",
+                done: relisted.size > 0,
+              },
+              {
+                label: "Relist",
+                detail: "Assigned to the next auction cycle",
+                done: relisted.size > 0,
+              },
             ]}
           />
         </Panel>

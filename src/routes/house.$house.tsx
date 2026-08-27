@@ -12,7 +12,9 @@ export const Route = createFileRoute("/house/$house")({
   head: ({ params }) => {
     const meta = slugs.includes(params.house) ? themes[0] : undefined;
     if (!meta) {
-      return { meta: [{ title: "House not found — ADEX" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [{ title: "House not found — ADEX" }, { name: "robots", content: "noindex" }],
+      };
     }
     const title = `${meta.name} — ADEX house style`;
     const description = `${meta.house}. ${meta.note}. The ADEX landing experience in the ${meta.name} house style.`;

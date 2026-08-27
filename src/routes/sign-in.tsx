@@ -12,7 +12,10 @@ export const Route = createFileRoute("/sign-in")({
           "Sign in to the ADEX buyer or admin portal to manage stones, bids, orders and compliance.",
       },
       { property: "og:title", content: "Sign in to ADEX" },
-      { property: "og:description", content: "Secure access to the ADEX diamond exchange portals." },
+      {
+        property: "og:description",
+        content: "Secure access to the ADEX diamond exchange portals.",
+      },
     ],
   }),
   component: SignIn,

@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
-import { DataTable, DefinitionList, GhostButton, GoldButton, PageHeader, Panel } from "@/components/adex/kit";
+import {
+  DataTable,
+  DefinitionList,
+  GhostButton,
+  GoldButton,
+  PageHeader,
+  Panel,
+} from "@/components/adex/kit";
 
 export const Route = createFileRoute("/admin/profile")({
   head: pageHead(
@@ -52,7 +59,11 @@ function AdminProfile() {
             dense
             rows={[
               { Action: "kyc.approve", Entity: "KYC-9008", Timestamp: "19 Aug 2026 09:41" },
-              { Action: "user.suspend", Entity: "fatou@konocoop.sl", Timestamp: "18 Aug 2026 17:55" },
+              {
+                Action: "user.suspend",
+                Entity: "fatou@konocoop.sl",
+                Timestamp: "18 Aug 2026 17:55",
+              },
             ]}
           />
         </Panel>

@@ -150,7 +150,13 @@ function ListingDetail() {
             <div className="p-6">
               {placedBid !== null ? (
                 <p className="text-sm font-semibold">
-                  Bid of {placedBid.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })} submitted.
+                  Bid of{" "}
+                  {placedBid.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0,
+                  })}{" "}
+                  submitted.
                 </p>
               ) : (
                 <BidForm

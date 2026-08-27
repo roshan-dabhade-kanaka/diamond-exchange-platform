@@ -101,20 +101,19 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     [update],
   );
 
-  const resubmitDocument = useCallback(
-    (id: string) => {
-      setSession((prev) => {
-        const merged = {
-          ...prev,
-          kycStatus: "PENDING" as const,
-          documents: prev.documents.map((d) => (d.id === id ? { ...d, status: "Uploaded" as const } : d)),
-        };
-        saveSession(merged);
-        return merged;
-      });
-    },
-    [],
-  );
+  const resubmitDocument = useCallback((id: string) => {
+    setSession((prev) => {
+      const merged = {
+        ...prev,
+        kycStatus: "PENDING" as const,
+        documents: prev.documents.map((d) =>
+          d.id === id ? { ...d, status: "Uploaded" as const } : d,
+        ),
+      };
+      saveSession(merged);
+      return merged;
+    });
+  }, []);
 
   const resetToPending = useCallback(() => {
     update({

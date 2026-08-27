@@ -11,22 +11,26 @@ import { ArrowRight, Gem, Handshake, Route, Scale, ShieldCheck, TimerReset } fro
 const platformPrinciples = [
   {
     title: "Full provenance",
-    detail: "Mine-to-finger records connect every stone to its country of origin and journey to market.",
+    detail:
+      "Mine-to-finger records connect every stone to its country of origin and journey to market.",
     icon: Route,
   },
   {
     title: "Equal partnership",
-    detail: "A value-adding model built around direct cooperation with African producing countries.",
+    detail:
+      "A value-adding model built around direct cooperation with African producing countries.",
     icon: Handshake,
   },
   {
     title: "Fair market access",
-    detail: "Transparent sales are designed to create equitable access and better returns across the value chain.",
+    detail:
+      "Transparent sales are designed to create equitable access and better returns across the value chain.",
     icon: Scale,
   },
   {
     title: "Faster to market",
-    detail: "A streamlined route from producer to buyer reduces friction, delay and unnecessary cost.",
+    detail:
+      "A streamlined route from producer to buyer reduces friction, delay and unnecessary cost.",
     icon: TimerReset,
   },
 ];
@@ -51,7 +55,9 @@ function MaisonPlatformStory() {
             <Gem aria-hidden="true" className="h-10 w-10 stroke-1 text-gold" />
             <div>
               <p className="adex-eyebrow text-gold">The promise</p>
-              <p className="font-display mt-1 text-2xl text-maison-emerald">Mine to finger, matters of record.</p>
+              <p className="font-display mt-1 text-2xl text-maison-emerald">
+                Mine to finger, matters of record.
+              </p>
             </div>
           </div>
         </div>
@@ -60,7 +66,10 @@ function MaisonPlatformStory() {
           <p className="adex-eyebrow text-gold">How the platform operates</p>
           <ol className="mt-9">
             {platformPrinciples.map((principle, index) => (
-              <li key={principle.title} className="grid grid-cols-[auto_1fr] gap-5 border-t border-gold/25 py-7 first:border-t-0 first:pt-0">
+              <li
+                key={principle.title}
+                className="grid grid-cols-[auto_1fr] gap-5 border-t border-gold/25 py-7 first:border-t-0 first:pt-0"
+              >
                 <span className="font-display text-3xl text-gold">{index + 1}</span>
                 <div>
                   <h3 className="font-display text-2xl text-maison-ivory">{principle.title}</h3>
@@ -69,8 +78,12 @@ function MaisonPlatformStory() {
               </li>
             ))}
           </ol>
-          <Link to="/collection" className="adex-nav mt-5 inline-flex items-center gap-3 border-b border-gold pb-2 text-maison-ivory">
-            Enter the private collection <ArrowRight aria-hidden="true" className="h-4 w-4 text-gold" />
+          <Link
+            to="/collection"
+            className="adex-nav mt-5 inline-flex items-center gap-3 border-b border-gold pb-2 text-maison-ivory"
+          >
+            Enter the private collection{" "}
+            <ArrowRight aria-hidden="true" className="h-4 w-4 text-gold" />
           </Link>
         </div>
       </div>
@@ -87,7 +100,6 @@ export function LandingPage() {
     <PublicShell bleed>
       <LandingHero feature={feature} onQuickView={setQuick} />
 
-
       <MaisonPlatformStory />
 
       {/* A glimpse of the collection — the full index lives on its own page */}
@@ -100,7 +112,10 @@ export function LandingPage() {
                 Three stones of distinction
               </h2>
             </div>
-            <Link to="/collection" className="adex-nav border-b border-gold pb-1 text-maison-emerald">
+            <Link
+              to="/collection"
+              className="adex-nav border-b border-gold pb-1 text-maison-emerald"
+            >
               View the full collection
             </Link>
           </header>
@@ -120,7 +135,11 @@ export function LandingPage() {
                 <div>
                   <p className="adex-eyebrow mt-5">{l.id}</p>
                   <h3 className="font-display mt-2 text-xl">
-                    <Link to="/listing/$listingId" params={{ listingId: l.id }} className="adex-link">
+                    <Link
+                      to="/listing/$listingId"
+                      params={{ listingId: l.id }}
+                      className="adex-link"
+                    >
                       {l.title}
                     </Link>
                   </h3>
@@ -129,8 +148,12 @@ export function LandingPage() {
                   </p>
                   <div className="mt-4 grid grid-cols-3 border-y border-gold/30 py-3 text-center">
                     <span className="text-[10px] uppercase tracking-[0.14em]">{l.status}</span>
-                    <span className="border-x border-gold/30 text-[10px] uppercase tracking-[0.14em]">{l.carat}</span>
-                    <span className="truncate px-1 text-[10px] uppercase tracking-[0.14em]">{formatCountdown(l.biddingWindowEnd)}</span>
+                    <span className="border-x border-gold/30 text-[10px] uppercase tracking-[0.14em]">
+                      {l.carat}
+                    </span>
+                    <span className="truncate px-1 text-[10px] uppercase tracking-[0.14em]">
+                      {formatCountdown(l.biddingWindowEnd)}
+                    </span>
                   </div>
                 </div>
               </article>
@@ -165,7 +188,6 @@ export function LandingPage() {
           </div>
         </div>
       </section>
-
 
       {quick ? <StoneQuickView stone={quick} onClose={() => setQuick(null)} /> : null}
     </PublicShell>

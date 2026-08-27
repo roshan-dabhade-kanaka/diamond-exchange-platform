@@ -75,10 +75,7 @@ function BuyerKyc() {
               ]}
             />
             <div className="mt-4 flex gap-2">
-              <GoldButton
-                type="button"
-                onClick={() => setKycStatus("PENDING")}
-              >
+              <GoldButton type="button" onClick={() => setKycStatus("PENDING")}>
                 {session.kycStatus === "NOT_STARTED" ? "Submit for review" : "Update submission"}
               </GoldButton>
               <GhostButton type="button">Save draft</GhostButton>
@@ -111,8 +108,16 @@ function BuyerKyc() {
             <Timeline
               steps={[
                 { label: "Submitted", detail: "Application received", done: stepIndex >= 1 },
-                { label: "Under review", detail: "Identity and source documents", done: stepIndex >= 2 },
-                { label: "AML screening", detail: "Risk and sanctions checks", done: stepIndex >= 3 },
+                {
+                  label: "Under review",
+                  detail: "Identity and source documents",
+                  done: stepIndex >= 2,
+                },
+                {
+                  label: "AML screening",
+                  detail: "Risk and sanctions checks",
+                  done: stepIndex >= 3,
+                },
                 {
                   label: session.kycStatus === "REJECTED" ? "Rejected" : "Approved",
                   detail: session.kycStatus === "REJECTED" ? "See reason above" : "Trading enabled",

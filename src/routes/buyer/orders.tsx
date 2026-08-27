@@ -98,7 +98,15 @@ function ReturnDialog({ orderId, stoneId }: { orderId: string; stoneId: string }
   );
 }
 
-function OrderDetailSheet({ purchase, open, onOpenChange }: { purchase: Purchase | null; open: boolean; onOpenChange: (open: boolean) => void }) {
+function OrderDetailSheet({
+  purchase,
+  open,
+  onOpenChange,
+}: {
+  purchase: Purchase | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   if (!purchase) return null;
   const invoice = invoices.find((i) => i.Order === purchase.orderId);
   const shipment = shipments.find((s) => s["Order ID"] === purchase.orderId);

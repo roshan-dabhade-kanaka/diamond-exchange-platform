@@ -1,5 +1,11 @@
 import { cn } from "@/lib/utils";
-import { formatUsd, OPS_SHARE_PERCENT, MINER_SHARE_PERCENT, PARTNER_SHARE_PERCENT, settlementSplit } from "@/lib/rules";
+import {
+  formatUsd,
+  OPS_SHARE_PERCENT,
+  MINER_SHARE_PERCENT,
+  PARTNER_SHARE_PERCENT,
+  settlementSplit,
+} from "@/lib/rules";
 import type { EscrowStatus } from "@/lib/adex-data";
 
 /**
@@ -23,7 +29,11 @@ export function SettlementSplitBar({
   const { ops, miner, partner } = settlementSplit(total);
   return (
     <div className={cn("space-y-2", className)}>
-      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-muted" role="img" aria-label={`Settlement split: ${OPS_SHARE_PERCENT}% operations, ${MINER_SHARE_PERCENT}% miner, ${PARTNER_SHARE_PERCENT}% partner`}>
+      <div
+        className="flex h-2.5 w-full overflow-hidden rounded-full bg-muted"
+        role="img"
+        aria-label={`Settlement split: ${OPS_SHARE_PERCENT}% operations, ${MINER_SHARE_PERCENT}% miner, ${PARTNER_SHARE_PERCENT}% partner`}
+      >
         <span className="h-full bg-adex-ink" style={{ width: `${OPS_SHARE_PERCENT}%` }} />
         <span className="h-full bg-gold" style={{ width: `${MINER_SHARE_PERCENT}%` }} />
         <span className="h-full bg-adex-emerald" style={{ width: `${PARTNER_SHARE_PERCENT}%` }} />
@@ -43,7 +53,8 @@ export function SettlementSplitBar({
         </div>
         <div>
           <p className="flex items-center gap-1.5 text-muted-foreground">
-            <span className="h-2 w-2 rounded-full bg-adex-emerald" /> Partner / FOMIN ({PARTNER_SHARE_PERCENT}%)
+            <span className="h-2 w-2 rounded-full bg-adex-emerald" /> Partner / FOMIN (
+            {PARTNER_SHARE_PERCENT}%)
           </p>
           <p className="mt-0.5 font-display text-base tabular-nums">{formatUsd(partner)}</p>
         </div>

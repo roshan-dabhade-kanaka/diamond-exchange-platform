@@ -58,10 +58,30 @@ function AdminLogistics() {
           <DataTable
             dense
             rows={[
-              { Document: "Buyer inspection report", Required: "Yes", Uploaded: "10 Aug 2026", Status: "Approved" },
-              { Document: "Photographs of stone", Required: "Yes", Uploaded: "10 Aug 2026", Status: "Approved" },
-              { Document: "Courier damage proof", Required: "Yes", Uploaded: "—", Status: "Pending" },
-              { Document: "Re-grading certificate", Required: "No", Uploaded: "—", Status: "Pending" },
+              {
+                Document: "Buyer inspection report",
+                Required: "Yes",
+                Uploaded: "10 Aug 2026",
+                Status: "Approved",
+              },
+              {
+                Document: "Photographs of stone",
+                Required: "Yes",
+                Uploaded: "10 Aug 2026",
+                Status: "Approved",
+              },
+              {
+                Document: "Courier damage proof",
+                Required: "Yes",
+                Uploaded: "—",
+                Status: "Pending",
+              },
+              {
+                Document: "Re-grading certificate",
+                Required: "No",
+                Uploaded: "—",
+                Status: "Pending",
+              },
             ]}
           />
           <div className="mt-4">

@@ -119,7 +119,9 @@ function ShowroomPage() {
             {(() => {
               const eligible = listings.filter((l) => l.isShowroomEligible);
               if (eligible.length === 0) {
-                return <EmptyState message="No stones are currently curated for showroom viewing." />;
+                return (
+                  <EmptyState message="No stones are currently curated for showroom viewing." />
+                );
               }
               return (
                 <div className="grid gap-3 sm:grid-cols-2">

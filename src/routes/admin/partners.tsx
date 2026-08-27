@@ -13,7 +13,10 @@ export const Route = createFileRoute("/admin/partners")({
 });
 
 function AdminPartners() {
-  const fominShareTotal = settlements.reduce((sum, s) => sum + settlementSplit(s.totalAmount).partner, 0);
+  const fominShareTotal = settlements.reduce(
+    (sum, s) => sum + settlementSplit(s.totalAmount).partner,
+    0,
+  );
   const fominShareDrawn = settlements
     .filter((s) => s.escrowStatus === "DISTRIBUTED")
     .reduce((sum, s) => sum + settlementSplit(s.totalAmount).partner, 0);

@@ -45,7 +45,10 @@ export function StoneQuickView({ stone, onClose }: { stone: Listing; onClose: ()
         className="absolute inset-0 cursor-default bg-foreground/70 backdrop-blur-sm"
       />
 
-      <div style={{ height: "88vh", maxHeight: "860px" }} className="adex-reveal relative z-10 grid w-full max-w-[1080px] grid-cols-1 overflow-y-auto border lg:overflow-hidden border-border bg-background shadow-2xl lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+      <div
+        style={{ height: "88vh", maxHeight: "860px" }}
+        className="adex-reveal relative z-10 grid w-full max-w-[1080px] grid-cols-1 overflow-y-auto border lg:overflow-hidden border-border bg-background shadow-2xl lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]"
+      >
         <button
           onClick={onClose}
           aria-label="Close"

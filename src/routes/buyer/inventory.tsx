@@ -43,7 +43,9 @@ function BuyerInventory() {
   }, [category, maxPrice, minCarat, kimberleyOnly]);
 
   const activeFilters = [
-    category !== "all" ? { key: "category", label: category, clear: () => setCategory("all") } : null,
+    category !== "all"
+      ? { key: "category", label: category, clear: () => setCategory("all") }
+      : null,
     maxPrice !== Infinity
       ? {
           key: "price",
@@ -53,7 +55,11 @@ function BuyerInventory() {
       : null,
     minCarat ? { key: "carat", label: `${minCarat}ct+`, clear: () => setMinCarat("") } : null,
     kimberleyOnly
-      ? { key: "kimberley", label: "Kimberley certified only", clear: () => setKimberleyOnly(false) }
+      ? {
+          key: "kimberley",
+          label: "Kimberley certified only",
+          clear: () => setKimberleyOnly(false),
+        }
       : null,
   ].filter((f): f is NonNullable<typeof f> => f !== null);
 

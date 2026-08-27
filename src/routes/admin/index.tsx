@@ -35,7 +35,9 @@ function AdminDashboard() {
   const awaitingPayout = soldInRange.filter((s) => s.escrowStatus === "HELD").length;
   const avgLotValue = soldInRange.length > 0 ? Math.round(grossValue / soldInRange.length) : 0;
 
-  const pendingCompliance = kycCases.filter((c) => c["Status"] === "Under Review" || c["Status"] === "Escalated");
+  const pendingCompliance = kycCases.filter(
+    (c) => c["Status"] === "Under Review" || c["Status"] === "Escalated",
+  );
   const escrowHeld = settlements.filter((s) => s.escrowStatus === "HELD");
   const actionItems = [
     ...pendingCompliance.map((c) => ({
@@ -69,7 +71,10 @@ function AdminDashboard() {
           { label: "Active Stones", value: String(activeStones) },
           { label: "KYC Pending", value: String(kycPending) },
           { label: "AML Cases", value: String(amlCases) },
-          { label: "Escrow Held", value: formatUsd(escrowHeld.reduce((s, x) => s + x.totalAmount, 0)) },
+          {
+            label: "Escrow Held",
+            value: formatUsd(escrowHeld.reduce((s, x) => s + x.totalAmount, 0)),
+          },
         ]}
       />
 
@@ -77,7 +82,10 @@ function AdminDashboard() {
         <Panel title="Action required" className="mt-6">
           <ul className="space-y-2 text-sm">
             {actionItems.map((item) => (
-              <li key={item.label} className="flex items-center justify-between border-b border-border pb-2 last:border-0">
+              <li
+                key={item.label}
+                className="flex items-center justify-between border-b border-border pb-2 last:border-0"
+              >
                 <div>
                   <p className="font-semibold">{item.label}</p>
                   <p className="text-xs text-muted-foreground">{item.detail}</p>
@@ -174,7 +182,10 @@ function AdminDashboard() {
               {settlements.slice(0, 3).map((s) => {
                 const { ops, miner, partner } = settlementSplit(s.totalAmount);
                 return (
-                  <div key={s.batch} className="border-b border-border pb-4 last:border-0 last:pb-0">
+                  <div
+                    key={s.batch}
+                    className="border-b border-border pb-4 last:border-0 last:pb-0"
+                  >
                     <p className="text-sm font-semibold">
                       {s.batch} — {s.seller} · {formatUsd(s.totalAmount)}
                     </p>

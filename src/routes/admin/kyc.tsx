@@ -63,7 +63,11 @@ function AdminKyc() {
     setEligRows((rows) =>
       rows.map((r) =>
         r["Case ID"] === caseId
-          ? { ...r, Status: status === "Approved" ? "Eligible" : status === "Rejected" ? "Ineligible" : status }
+          ? {
+              ...r,
+              Status:
+                status === "Approved" ? "Eligible" : status === "Rejected" ? "Ineligible" : status,
+            }
           : r,
       ),
     );
@@ -105,7 +109,10 @@ function AdminKyc() {
             <thead>
               <tr className="bg-panel text-panel-foreground">
                 {Object.keys(rowsForTab[0] ?? {}).map((c) => (
-                  <th key={c} className="px-4 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase">
+                  <th
+                    key={c}
+                    className="px-4 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase"
+                  >
                     {c}
                   </th>
                 ))}
@@ -152,14 +159,12 @@ function AdminKyc() {
                         documentChecklist[String(openCase["Type"])] ??
                         documentChecklist["Buyer — Organization"] ??
                         []
-                      ).map(
-                        (doc) => (
-                          <li key={doc} className="flex items-center justify-between">
-                            {doc}
-                            <StatusBadge value="Approved" />
-                          </li>
-                        ),
-                      )}
+                      ).map((doc) => (
+                        <li key={doc} className="flex items-center justify-between">
+                          {doc}
+                          <StatusBadge value="Approved" />
+                        </li>
+                      ))}
                     </ul>
                   </Panel>
                 ) : null}

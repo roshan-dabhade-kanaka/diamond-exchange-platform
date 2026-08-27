@@ -75,7 +75,10 @@ function AdminUsers() {
           <thead>
             <tr className="bg-panel text-panel-foreground">
               {Object.keys(rows[0] ?? {}).map((c) => (
-                <th key={c} className="px-4 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase">
+                <th
+                  key={c}
+                  className="px-4 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase"
+                >
                   {c}
                 </th>
               ))}
@@ -137,7 +140,10 @@ function AdminUsers() {
                 />
                 <Panel title="Role & permissions">
                   <p className="text-sm text-muted-foreground">
-                    Assigned role: <span className="font-semibold text-foreground">{String(selected["Role"])}</span>
+                    Assigned role:{" "}
+                    <span className="font-semibold text-foreground">
+                      {String(selected["Role"])}
+                    </span>
                   </p>
                 </Panel>
                 <div className="flex flex-wrap gap-2">

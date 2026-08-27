@@ -32,7 +32,11 @@ function Watchlist() {
         title="Watchlist"
         description="Items you are tracking ahead of auction close."
         actions={
-          <GhostButton type="button" onClick={() => setWatchedIds([])} disabled={watched.length === 0}>
+          <GhostButton
+            type="button"
+            onClick={() => setWatchedIds([])}
+            disabled={watched.length === 0}
+          >
             Clear watchlist
           </GhostButton>
         }
@@ -62,7 +66,8 @@ function Watchlist() {
                 <p className="mt-2 text-sm font-semibold">{l.currentBid}</p>
                 {l.myBidStatus !== "NONE" ? (
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Your status: <span className="font-semibold">{bidStatusLabel[l.myBidStatus]}</span>
+                    Your status:{" "}
+                    <span className="font-semibold">{bidStatusLabel[l.myBidStatus]}</span>
                   </p>
                 ) : null}
                 <div className="mt-3 flex gap-2">

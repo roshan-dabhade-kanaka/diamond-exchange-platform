@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
-import { EmptyState, GhostButton, GoldButton, KpiGrid, PageHeader, Panel, StatusBadge } from "@/components/adex/kit";
+import {
+  EmptyState,
+  GhostButton,
+  GoldButton,
+  KpiGrid,
+  PageHeader,
+  Panel,
+  StatusBadge,
+} from "@/components/adex/kit";
 import { StoneThumb } from "@/components/adex/stone-gallery";
 import { listings } from "@/lib/adex-data";
 
@@ -13,11 +21,29 @@ export const Route = createFileRoute("/admin/showroom")({
   component: AdminShowroom,
 });
 
-const locations = ["Antwerp · Hoveniersstraat", "Dubai · DMCC Almas Tower", "Kinshasa · Collection Centre"];
+const locations = [
+  "Antwerp · Hoveniersstraat",
+  "Dubai · DMCC Almas Tower",
+  "Kinshasa · Collection Centre",
+];
 
 const upcomingVisits = [
-  { id: "VIS-3081", showroom: "Antwerp · Hoveniersstraat", buyer: "Vermeulen Gems", stones: "ADX-L-0312, ADX-S-04412", when: "02 Sep 2026 · 10:30", status: "Confirmed" },
-  { id: "VIS-3096", showroom: "Dubai · DMCC Almas Tower", buyer: "Sharma Diamonds", stones: "ADX-S-04418", when: "09 Sep 2026 · 14:00", status: "Pending" },
+  {
+    id: "VIS-3081",
+    showroom: "Antwerp · Hoveniersstraat",
+    buyer: "Vermeulen Gems",
+    stones: "ADX-L-0312, ADX-S-04412",
+    when: "02 Sep 2026 · 10:30",
+    status: "Confirmed",
+  },
+  {
+    id: "VIS-3096",
+    showroom: "Dubai · DMCC Almas Tower",
+    buyer: "Sharma Diamonds",
+    stones: "ADX-S-04418",
+    when: "09 Sep 2026 · 14:00",
+    status: "Pending",
+  },
 ];
 
 function AdminShowroom() {
@@ -38,7 +64,10 @@ function AdminShowroom() {
           { label: "Curated stones", value: String(eligibleCount) },
           { label: "Showrooms", value: String(locations.length) },
           { label: "Upcoming visits", value: String(upcomingVisits.length) },
-          { label: "Awaiting confirmation", value: String(upcomingVisits.filter((v) => v.status === "Pending").length) },
+          {
+            label: "Awaiting confirmation",
+            value: String(upcomingVisits.filter((v) => v.status === "Pending").length),
+          },
         ]}
       />
 
@@ -86,7 +115,10 @@ function AdminShowroom() {
         ) : (
           <div className="space-y-3">
             {upcomingVisits.map((v) => (
-              <div key={v.id} className="flex items-center justify-between border border-border p-3">
+              <div
+                key={v.id}
+                className="flex items-center justify-between border border-border p-3"
+              >
                 <div>
                   <p className="text-sm font-semibold">
                     {v.id} — {v.buyer}

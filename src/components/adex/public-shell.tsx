@@ -2,12 +2,10 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { AdexLogo } from "./logo";
 
-
 const nav = [
   { label: "Home", to: "/" },
   { label: "The Collection", to: "/collection" },
 ];
-
 
 const footerLinks = [
   "Help",
@@ -30,7 +28,6 @@ export function PublicShell({
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <div className="bg-gold text-center text-[11px] tracking-[0.22em] text-gold-foreground uppercase">
-
         <p className="px-4 py-2.5">
           Direct from African origin · Transparent international market access
         </p>
@@ -81,14 +78,13 @@ export function PublicShell({
         <main className="mx-auto w-full max-w-[1240px] flex-1 px-6 py-14">{children}</main>
       )}
 
-
       <footer className="mt-10 border-t border-border">
         <div className="mx-auto max-w-[1240px] px-6 py-12">
           <div className="flex flex-col items-center gap-7 text-center">
             <p className="font-display text-2xl tracking-[0.14em] uppercase">ADEX</p>
             <p className="max-w-md text-sm text-muted-foreground">
-              The international marketplace for transparent and fair sales of rough, uncut
-              diamonds and gemstones from Africa to the world.
+              The international marketplace for transparent and fair sales of rough, uncut diamonds
+              and gemstones from Africa to the world.
             </p>
             <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3">
               {footerLinks.map((l) => (

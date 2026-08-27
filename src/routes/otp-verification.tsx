@@ -10,7 +10,8 @@ export const Route = createFileRoute("/otp-verification")({
       { title: "Verify your account | ADEX" },
       {
         name: "description",
-        content: "Enter the one-time code sent to your email or phone to activate your ADEX account.",
+        content:
+          "Enter the one-time code sent to your email or phone to activate your ADEX account.",
       },
     ],
   }),

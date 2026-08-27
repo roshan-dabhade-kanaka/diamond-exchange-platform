@@ -123,7 +123,9 @@ function BuyerMarketplace() {
                   closes in {formatCountdown(item.biddingWindowEnd)}
                 </p>
                 {placedBid !== null ? (
-                  <p className="mt-4 text-sm font-semibold">Bid submitted — you'll be notified if outbid.</p>
+                  <p className="mt-4 text-sm font-semibold">
+                    Bid submitted — you'll be notified if outbid.
+                  </p>
                 ) : (
                   <BidForm
                     className="mt-4"

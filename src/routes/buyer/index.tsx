@@ -42,8 +42,14 @@ function BuyerDashboard() {
       {outstandingOrders.length > 0 ? (
         <div className="adex-panel mb-6 border-l-4 border-gold bg-gold/5 p-4">
           <p className="text-sm font-semibold">
-            {outstandingOrders.length} order{outstandingOrders.length > 1 ? "s" : ""} awaiting payment —{" "}
-            {awaitingPaymentTotal.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })} due.
+            {outstandingOrders.length} order{outstandingOrders.length > 1 ? "s" : ""} awaiting
+            payment —{" "}
+            {awaitingPaymentTotal.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 0,
+            })}{" "}
+            due.
           </p>
           <Link to="/buyer/orders" className="adex-link mt-1 inline-block text-sm">
             Review and pay →

@@ -56,7 +56,11 @@ export function requiresIndividualProcessing(carat: number): boolean {
 }
 
 export function formatUsd(value: number): string {
-  return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return value.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
 }
 
 /** Parses a formatted currency string like "$184,500" or "$160,000 – $210,000" (first value) into a number. */

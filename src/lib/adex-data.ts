@@ -31,7 +31,6 @@ function hoursFromNow(hours: number): string {
 }
 
 export const listings: Listing[] = [
-
   {
     id: "ADX-S-04412",
     title: "Rough diamond, gem quality",
@@ -730,11 +729,46 @@ export type Settlement = {
 };
 
 export const settlements: Settlement[] = [
-  { batch: "PAY-4471", seller: "Kasai Cooperative 12", stones: 3, totalAmount: 164_300, escrowStatus: "HELD", soldAt: "2026-08-17" },
-  { batch: "PAY-4468", seller: "Tshikapa Group", stones: 1, totalAmount: 388_000, escrowStatus: "HELD", soldAt: "2026-08-12" },
-  { batch: "PAY-4460", seller: "Mbuji-Mayi Artisanal", stones: 2, totalAmount: 61_750, escrowStatus: "DISTRIBUTED", soldAt: "2026-08-05" },
-  { batch: "PAY-4451", seller: "Kono Cooperative", stones: 4, totalAmount: 210_000, escrowStatus: "DISTRIBUTED", soldAt: "2026-07-28" },
-  { batch: "PAY-4439", seller: "Kasai Cooperative 12", stones: 1, totalAmount: 96_200, escrowStatus: "DISTRIBUTED", soldAt: "2026-07-14" },
+  {
+    batch: "PAY-4471",
+    seller: "Kasai Cooperative 12",
+    stones: 3,
+    totalAmount: 164_300,
+    escrowStatus: "HELD",
+    soldAt: "2026-08-17",
+  },
+  {
+    batch: "PAY-4468",
+    seller: "Tshikapa Group",
+    stones: 1,
+    totalAmount: 388_000,
+    escrowStatus: "HELD",
+    soldAt: "2026-08-12",
+  },
+  {
+    batch: "PAY-4460",
+    seller: "Mbuji-Mayi Artisanal",
+    stones: 2,
+    totalAmount: 61_750,
+    escrowStatus: "DISTRIBUTED",
+    soldAt: "2026-08-05",
+  },
+  {
+    batch: "PAY-4451",
+    seller: "Kono Cooperative",
+    stones: 4,
+    totalAmount: 210_000,
+    escrowStatus: "DISTRIBUTED",
+    soldAt: "2026-07-28",
+  },
+  {
+    batch: "PAY-4439",
+    seller: "Kasai Cooperative 12",
+    stones: 1,
+    totalAmount: 96_200,
+    escrowStatus: "DISTRIBUTED",
+    soldAt: "2026-07-14",
+  },
 ];
 
 export const revenueSeries = [

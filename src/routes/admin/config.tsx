@@ -116,10 +116,30 @@ const groups: { title: string; intro: string; settings: Setting[] }[] = [
 ];
 
 const lists = [
-  { List: "Stone classifications", Purpose: "Choices sellers pick from when registering", Entries: 14, Updated: "12 Aug 2026" },
-  { List: "Countries and regions", Purpose: "Origin and destination options", Entries: 54, Updated: "01 Jul 2026" },
-  { List: "Logistics providers", Purpose: "Carriers that can be assigned to a shipment", Entries: 6, Updated: "09 Aug 2026" },
-  { List: "Document types", Purpose: "Documents that can be attached to a stone or lot", Entries: 18, Updated: "04 Aug 2026" },
+  {
+    List: "Stone classifications",
+    Purpose: "Choices sellers pick from when registering",
+    Entries: 14,
+    Updated: "12 Aug 2026",
+  },
+  {
+    List: "Countries and regions",
+    Purpose: "Origin and destination options",
+    Entries: 54,
+    Updated: "01 Jul 2026",
+  },
+  {
+    List: "Logistics providers",
+    Purpose: "Carriers that can be assigned to a shipment",
+    Entries: 6,
+    Updated: "09 Aug 2026",
+  },
+  {
+    List: "Document types",
+    Purpose: "Documents that can be attached to a stone or lot",
+    Entries: 18,
+    Updated: "04 Aug 2026",
+  },
 ];
 
 function AdminConfig() {

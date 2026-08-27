@@ -90,8 +90,8 @@ function AnalysisPage() {
       {!isCleared ? (
         <div className="adex-panel mb-6 border-l-4 border-warning bg-warning/10 p-4">
           <p className="text-sm font-semibold">
-            Paid Analysis and Cutting Plans are available once your KYC/AML and eligibility review are
-            approved.
+            Paid Analysis and Cutting Plans are available once your KYC/AML and eligibility review
+            are approved.
           </p>
           <Link to="/buyer/kyc" className="adex-link mt-1 inline-block text-sm">
             Review KYC / AML status →

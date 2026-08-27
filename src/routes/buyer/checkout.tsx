@@ -39,9 +39,18 @@ const methods = [
 
 const nextSteps = [
   { label: "Escrow confirmed", detail: "Funds verified and held at the Swiss transaction bank." },
-  { label: "Kimberley certificate transferred", detail: "Certificate of origin reassigned to your account." },
-  { label: "Export documentation prepared", detail: "Customs and export permits generated for this stone." },
-  { label: "Shipment scheduled", detail: "Handed to insured carriage with chain-of-custody tracking." },
+  {
+    label: "Kimberley certificate transferred",
+    detail: "Certificate of origin reassigned to your account.",
+  },
+  {
+    label: "Export documentation prepared",
+    detail: "Customs and export permits generated for this stone.",
+  },
+  {
+    label: "Shipment scheduled",
+    detail: "Handed to insured carriage with chain-of-custody tracking.",
+  },
 ];
 
 const documents = [
@@ -77,9 +86,7 @@ function CheckoutPage() {
 
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <Panel title="What happens next">
-            <Timeline
-              steps={nextSteps.map((s, i) => ({ ...s, done: i === 0 }))}
-            />
+            <Timeline steps={nextSteps.map((s, i) => ({ ...s, done: i === 0 }))} />
           </Panel>
 
           <div className="space-y-6">
@@ -89,7 +96,10 @@ function CheckoutPage() {
                 items={[
                   { label: "Stone", value: "ADX-S-04412 · 4.12 ct" },
                   { label: "Total paid", value: money(total) },
-                  { label: "Payment method", value: method === "wire" ? "Wire transfer" : "Card payment" },
+                  {
+                    label: "Payment method",
+                    value: method === "wire" ? "Wire transfer" : "Card payment",
+                  },
                 ]}
               />
             </Panel>
@@ -97,7 +107,10 @@ function CheckoutPage() {
             <Panel title="Documents">
               <ul className="space-y-2 text-sm">
                 {documents.map((d) => (
-                  <li key={d.ref} className="flex items-center justify-between border-b border-border pb-2">
+                  <li
+                    key={d.ref}
+                    className="flex items-center justify-between border-b border-border pb-2"
+                  >
                     <span>{d.name}</span>
                     <span className="adex-link text-xs">{d.ref}</span>
                   </li>
@@ -110,7 +123,10 @@ function CheckoutPage() {
               <p className="text-sm text-muted-foreground">
                 Available for questions on delivery, insurance or certification transfer.
               </p>
-              <a href="mailto:lea.fontaine@adex.example" className="adex-link mt-2 inline-block text-sm">
+              <a
+                href="mailto:lea.fontaine@adex.example"
+                className="adex-link mt-2 inline-block text-sm"
+              >
                 lea.fontaine@adex.example
               </a>
             </Panel>
@@ -224,7 +240,11 @@ function CheckoutPage() {
               steps={[
                 { label: "Auction won", detail: "ADX-S-04412 at $184,500.", done: true },
                 { label: "Payment", detail: "Wire or card inside the locked window.", done: false },
-                { label: "Certification", detail: "Escrow confirms and certificate transfers.", done: false },
+                {
+                  label: "Certification",
+                  detail: "Escrow confirms and certificate transfers.",
+                  done: false,
+                },
                 { label: "Delivery", detail: "Insured carriage with tracking.", done: false },
               ]}
             />

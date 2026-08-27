@@ -53,7 +53,9 @@ function AdminPayments() {
   const minerShareTotal = rows.reduce((sum, s) => sum + settlementSplit(s.totalAmount).miner, 0);
 
   function releasePayout(batch: string) {
-    setRows((prev) => prev.map((s) => (s.batch === batch ? { ...s, escrowStatus: "DISTRIBUTED" } : s)));
+    setRows((prev) =>
+      prev.map((s) => (s.batch === batch ? { ...s, escrowStatus: "DISTRIBUTED" } : s)),
+    );
   }
 
   return (

@@ -33,8 +33,14 @@ export function BidForm({
   const schema = z.object({
     amount: z.coerce
       .number({ invalid_type_error: "Enter a bid amount." })
-      .min(min, `Bids must be at least ${formatUsd(min)} — ±20% of the ${formatUsd(midpoint)} estimate.`)
-      .max(max, `Bids must be at most ${formatUsd(max)} — ±20% of the ${formatUsd(midpoint)} estimate.`),
+      .min(
+        min,
+        `Bids must be at least ${formatUsd(min)} — ±20% of the ${formatUsd(midpoint)} estimate.`,
+      )
+      .max(
+        max,
+        `Bids must be at most ${formatUsd(max)} — ±20% of the ${formatUsd(midpoint)} estimate.`,
+      ),
   });
 
   const {
@@ -48,7 +54,8 @@ export function BidForm({
     return (
       <div className={className}>
         <p className="text-sm text-muted-foreground">
-          Bidding is enabled only for buyers who have cleared KYC/AML and regulatory eligibility review.
+          Bidding is enabled only for buyers who have cleared KYC/AML and regulatory eligibility
+          review.
           {session.kycStatus === "REJECTED" && session.rejectionReason
             ? ` Your last submission was rejected: ${session.rejectionReason}.`
             : ""}
@@ -79,7 +86,8 @@ export function BidForm({
         />
       </label>
       <p className="mt-1.5 text-xs text-muted-foreground">
-        Allowed range {formatUsd(min)} – {formatUsd(max)} (±20% of the {formatUsd(midpoint)} estimate)
+        Allowed range {formatUsd(min)} – {formatUsd(max)} (±20% of the {formatUsd(midpoint)}{" "}
+        estimate)
         {currentBid ? ` · current bid ${currentBid}` : ""}
       </p>
       {errors.amount ? (

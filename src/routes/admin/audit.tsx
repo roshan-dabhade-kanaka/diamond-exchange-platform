@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
-import { DefinitionList, FilterBar, GhostButton, PageHeader, Panel, StatusBadge } from "@/components/adex/kit";
+import {
+  DefinitionList,
+  FilterBar,
+  GhostButton,
+  PageHeader,
+  Panel,
+  StatusBadge,
+} from "@/components/adex/kit";
 import { auditLogs, type Row } from "@/lib/adex-data";
 import {
   Sheet,
@@ -48,7 +55,10 @@ function AdminAudit() {
           <thead>
             <tr className="bg-panel text-panel-foreground">
               {Object.keys(auditLogs[0] ?? {}).map((c) => (
-                <th key={c} className="px-4 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase">
+                <th
+                  key={c}
+                  className="px-4 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase"
+                >
                   {c}
                 </th>
               ))}
