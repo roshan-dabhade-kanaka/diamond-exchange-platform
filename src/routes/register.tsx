@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { PublicShell } from "@/components/adex/public-shell";
 import { FormGrid, GoldButton, Panel, Timeline } from "@/components/adex/kit";
 
@@ -22,12 +22,20 @@ export const Route = createFileRoute("/register")({
 });
 
 function Register() {
+  const navigate = useNavigate();
+
   return (
     <PublicShell>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div>
           <h1 className="adex-section-title">Registration</h1>
-          <form className="adex-panel mt-6 space-y-6 p-6">
+          <form
+            className="adex-panel mt-6 space-y-6 p-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate({ to: "/otp-verification" });
+            }}
+          >
             <fieldset>
               <legend className="font-display mb-3 text-base">Account type</legend>
               <div className="flex flex-wrap gap-4 text-sm font-semibold">
@@ -67,7 +75,7 @@ function Register() {
             </label>
 
             <div className="flex gap-2">
-              <GoldButton>Create account</GoldButton>
+              <GoldButton type="submit">Create account</GoldButton>
               <Link
                 to="/sign-in"
                 className="h-9 rounded-sm border border-input px-4 text-sm leading-9 font-semibold hover:bg-muted"

@@ -14,6 +14,7 @@ import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as BrowseRouteImport } from './routes/browse'
 import { Route as BuyerRouteRouteImport } from './routes/buyer/route'
 import { Route as CollectionRouteImport } from './routes/collection'
+import { Route as OtpVerificationRouteImport } from './routes/otp-verification'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as SignInRouteImport } from './routes/sign-in'
@@ -84,6 +85,11 @@ const BuyerRouteRoute = BuyerRouteRouteImport.update({
 const CollectionRoute = CollectionRouteImport.update({
   id: '/collection',
   path: '/collection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OtpVerificationRoute = OtpVerificationRouteImport.update({
+  id: '/otp-verification',
+  path: '/otp-verification',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -323,6 +329,7 @@ export interface FileRoutesByFullPath {
   '/buyer': typeof BuyerRouteRouteWithChildren
   '/browse': typeof BrowseRoute
   '/collection': typeof CollectionRoute
+  '/otp-verification': typeof OtpVerificationRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
   '/sign-in': typeof SignInRoute
@@ -374,6 +381,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/browse': typeof BrowseRoute
   '/collection': typeof CollectionRoute
+  '/otp-verification': typeof OtpVerificationRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
   '/sign-in': typeof SignInRoute
@@ -428,6 +436,7 @@ export interface FileRoutesById {
   '/buyer': typeof BuyerRouteRouteWithChildren
   '/browse': typeof BrowseRoute
   '/collection': typeof CollectionRoute
+  '/otp-verification': typeof OtpVerificationRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
   '/sign-in': typeof SignInRoute
@@ -483,6 +492,7 @@ export interface FileRouteTypes {
     | '/buyer'
     | '/browse'
     | '/collection'
+    | '/otp-verification'
     | '/register'
     | '/search'
     | '/sign-in'
@@ -534,6 +544,7 @@ export interface FileRouteTypes {
     | '/'
     | '/browse'
     | '/collection'
+    | '/otp-verification'
     | '/register'
     | '/search'
     | '/sign-in'
@@ -587,6 +598,7 @@ export interface FileRouteTypes {
     | '/buyer'
     | '/browse'
     | '/collection'
+    | '/otp-verification'
     | '/register'
     | '/search'
     | '/sign-in'
@@ -641,6 +653,7 @@ export interface RootRouteChildren {
   BuyerRouteRoute: typeof BuyerRouteRouteWithChildren
   BrowseRoute: typeof BrowseRoute
   CollectionRoute: typeof CollectionRoute
+  OtpVerificationRoute: typeof OtpVerificationRoute
   RegisterRoute: typeof RegisterRoute
   SearchRoute: typeof SearchRoute
   SignInRoute: typeof SignInRoute
@@ -685,6 +698,13 @@ declare module '@tanstack/react-router' {
       path: '/collection'
       fullPath: '/collection'
       preLoaderRoute: typeof CollectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/otp-verification': {
+      id: '/otp-verification'
+      path: '/otp-verification'
+      fullPath: '/otp-verification'
+      preLoaderRoute: typeof OtpVerificationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -1116,6 +1136,7 @@ const rootRouteChildren: RootRouteChildren = {
   BuyerRouteRoute: BuyerRouteRouteWithChildren,
   BrowseRoute: BrowseRoute,
   CollectionRoute: CollectionRoute,
+  OtpVerificationRoute: OtpVerificationRoute,
   RegisterRoute: RegisterRoute,
   SearchRoute: SearchRoute,
   SignInRoute: SignInRoute,
