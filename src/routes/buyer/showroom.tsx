@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
 import {
   DataTable,
+  EmptyState,
   FormGrid,
   GhostButton,
   GoldButton,
@@ -115,18 +116,26 @@ function ShowroomPage() {
           </Panel>
 
           <Panel title="Available for viewing">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {listings.slice(0, 2).map((l) => (
-                <div key={l.id} className="adex-panel overflow-hidden">
-                  <StoneThumb stoneId={l.id} className="aspect-[4/3] w-full" />
-                  <div className="p-3">
-                    <p className="adex-link text-xs">{l.id}</p>
-                    <p className="truncate text-sm font-semibold">{l.title}</p>
-                    <p className="text-xs text-muted-foreground">{l.carat}</p>
-                  </div>
+            {(() => {
+              const eligible = listings.filter((l) => l.isShowroomEligible);
+              if (eligible.length === 0) {
+                return <EmptyState message="No stones are currently curated for showroom viewing." />;
+              }
+              return (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {eligible.map((l) => (
+                    <div key={l.id} className="adex-panel overflow-hidden">
+                      <StoneThumb stoneId={l.id} className="aspect-[4/3] w-full" />
+                      <div className="p-3">
+                        <p className="adex-link text-xs">{l.id}</p>
+                        <p className="truncate text-sm font-semibold">{l.title}</p>
+                        <p className="text-xs text-muted-foreground">{l.carat}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              );
+            })()}
           </Panel>
         </div>
       </div>

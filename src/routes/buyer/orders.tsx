@@ -14,7 +14,7 @@ import {
   Timeline,
 } from "@/components/adex/kit";
 import { PurchaseCard } from "@/components/adex/journey";
-import { purchases, returnsRows, shipments } from "@/lib/adex-data";
+import { purchases, returnsRows, shipments, type Purchase } from "@/lib/adex-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
@@ -23,6 +23,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
 export const Route = createFileRoute("/buyer/orders")({
   head: pageHead(
@@ -91,7 +98,74 @@ function ReturnDialog({ orderId, stoneId }: { orderId: string; stoneId: string }
   );
 }
 
+function OrderDetailSheet({ purchase, open, onOpenChange }: { purchase: Purchase | null; open: boolean; onOpenChange: (open: boolean) => void }) {
+  if (!purchase) return null;
+  const invoice = invoices.find((i) => i.Order === purchase.orderId);
+  const shipment = shipments.find((s) => s["Order ID"] === purchase.orderId);
+  const ret = returnsRows.find((r) => r["Order"] === purchase.orderId);
+
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent className="w-full overflow-y-auto sm:max-w-lg">
+        <SheetHeader>
+          <SheetTitle>{purchase.orderId}</SheetTitle>
+          <SheetDescription>{purchase.title}</SheetDescription>
+        </SheetHeader>
+        <div className="space-y-6 px-4 pb-6">
+          <Panel title="Order">
+            <DefinitionList
+              items={[
+                { label: "Stone", value: purchase.stoneId },
+                { label: "Seller", value: purchase.seller },
+                { label: "Amount", value: purchase.amount },
+                { label: "Next step", value: purchase.nextStep },
+              ]}
+            />
+          </Panel>
+          {invoice ? (
+            <Panel title={`Invoice ${invoice.Invoice}`}>
+              <DefinitionList
+                items={[
+                  { label: "Amount", value: invoice.Amount },
+                  { label: "Due", value: invoice.Due },
+                  { label: "Method", value: invoice.Method },
+                  { label: "Status", value: invoice.Status },
+                ]}
+              />
+            </Panel>
+          ) : null}
+          {shipment ? (
+            <Panel title={`Shipment ${String(shipment["Shipment ID"])}`}>
+              <DefinitionList
+                items={[
+                  { label: "Provider", value: String(shipment["Provider"]) },
+                  { label: "Tracking", value: String(shipment["Tracking"]) },
+                  { label: "Expected delivery", value: String(shipment["Expected Delivery"]) },
+                  { label: "Status", value: String(shipment["Status"]) },
+                ]}
+              />
+            </Panel>
+          ) : null}
+          {ret ? (
+            <Panel title={`Return ${String(ret["Return ID"])}`}>
+              <DefinitionList
+                items={[
+                  { label: "Reason", value: String(ret["Reason"]) },
+                  { label: "Raised", value: String(ret["Raised"]) },
+                  { label: "Status", value: String(ret["Status"]) },
+                ]}
+              />
+            </Panel>
+          ) : null}
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
 function BuyerOrders() {
+  const [detailOrder, setDetailOrder] = useState<Purchase | null>(null);
+
   return (
     <>
       <PageHeader
@@ -130,7 +204,12 @@ function BuyerOrders() {
               key={p.orderId}
               purchase={p}
               action={
-                p.stage >= 4 ? <ReturnDialog orderId={p.orderId} stoneId={p.stoneId} /> : undefined
+                <div className="flex gap-2">
+                  <GhostButton className="h-8 px-3" type="button" onClick={() => setDetailOrder(p)}>
+                    View details
+                  </GhostButton>
+                  {p.stage >= 4 ? <ReturnDialog orderId={p.orderId} stoneId={p.stoneId} /> : null}
+                </div>
               }
             />
           ))}
@@ -196,6 +275,12 @@ function BuyerOrders() {
           </Panel>
         </TabsContent>
       </Tabs>
+
+      <OrderDetailSheet
+        purchase={detailOrder}
+        open={detailOrder !== null}
+        onOpenChange={(open) => !open && setDetailOrder(null)}
+      />
     </>
   );
 }
