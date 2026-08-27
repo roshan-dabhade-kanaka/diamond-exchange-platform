@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
 import {
   DefinitionList,
-  FilterBar,
+  EmptyState,
   GhostButton,
-  GoldButton,
   PageHeader,
   Panel,
   StatusBadge,
 } from "@/components/adex/kit";
 import { CertificateCards, StoneGallery, StoneThumb } from "@/components/adex/stone-gallery";
+import { BidForm } from "@/components/adex/bid-form";
 import { listings } from "@/lib/adex-data";
+import { formatCountdown } from "@/lib/rules";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/buyer/marketplace")({
@@ -24,7 +25,14 @@ export const Route = createFileRoute("/buyer/marketplace")({
 
 function BuyerMarketplace() {
   const [selectedId, setSelectedId] = useState(listings[0]!.id);
-  const item = listings.find((l) => l.id === selectedId) ?? listings[0]!;
+  const [kimberleyOnly, setKimberleyOnly] = useState(false);
+  const [placedBid, setPlacedBid] = useState<number | null>(null);
+
+  const visible = useMemo(
+    () => listings.filter((l) => !kimberleyOnly || l.isKimberleyApproved),
+    [kimberleyOnly],
+  );
+  const item = visible.find((l) => l.id === selectedId) ?? visible[0] ?? listings[0]!;
 
   return (
     <>
@@ -32,11 +40,22 @@ function BuyerMarketplace() {
         title="Marketplace"
         description="Pick a lot on the left and inspect it on the right — the list stays put while you compare."
       />
-      <FilterBar fields={["Carat range", "Price range", "Certification", "Availability"]} />
+      <div className="adex-panel mb-4 flex items-center gap-3 p-4">
+        <label className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">
+          <input
+            type="checkbox"
+            checked={kimberleyOnly}
+            onChange={(e) => setKimberleyOnly(e.target.checked)}
+            className="accent-[var(--gold)]"
+          />
+          Kimberley certified only
+        </label>
+      </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
         <div className="min-w-0 space-y-3 xl:max-h-[calc(100vh-6rem)] xl:overflow-y-auto xl:pr-1">
-          {listings.map((l) => {
+          {visible.length === 0 ? <EmptyState message="No lots match this filter." /> : null}
+          {visible.map((l) => {
             const active = l.id === item.id;
             return (
               <button
@@ -56,7 +75,7 @@ function BuyerMarketplace() {
                   </div>
                   <p className="truncate text-sm font-semibold">{l.title}</p>
                   <p className="text-xs text-muted-foreground">
-                    {l.carat} · ends in {l.endsIn}
+                    {l.carat} · ends in {formatCountdown(l.biddingWindowEnd)}
                   </p>
                   <p className="text-sm font-semibold">{l.currentBid}</p>
                 </div>
@@ -100,16 +119,22 @@ function BuyerMarketplace() {
               <Panel title="Bid now">
                 <p className="text-xs tracking-wide text-muted-foreground uppercase">Current bid</p>
                 <p className="font-display text-3xl">{item.currentBid}</p>
-                <p className="mt-1 text-xs text-muted-foreground">closes in {item.endsIn}</p>
-                <label className="mt-4 flex flex-col gap-1 text-xs font-semibold">
-                  Your bid (USD)
-                  <input
-                    className="h-9 rounded-sm border border-input bg-background px-3 text-sm font-normal focus:border-ring focus:outline-none"
-                    placeholder="190,000"
+                <p className="mt-1 text-xs text-muted-foreground">
+                  closes in {formatCountdown(item.biddingWindowEnd)}
+                </p>
+                {placedBid !== null ? (
+                  <p className="mt-4 text-sm font-semibold">Bid submitted — you'll be notified if outbid.</p>
+                ) : (
+                  <BidForm
+                    className="mt-4"
+                    estimate={item.estimate}
+                    currentBid={item.currentBid}
+                    onSubmit={(amount) => setPlacedBid(amount)}
                   />
-                </label>
-                <GoldButton className="mt-4 w-full">Place bid</GoldButton>
-                <GhostButton className="mt-2 w-full">Add to watchlist</GhostButton>
+                )}
+                <GhostButton className="mt-2 w-full" type="button">
+                  Add to watchlist
+                </GhostButton>
                 <p className="mt-3 text-xs text-muted-foreground">
                   Winning this lot creates the order, invoice and shipment automatically under My
                   Purchases.

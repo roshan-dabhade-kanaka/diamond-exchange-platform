@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { PublicShell } from "@/components/adex/public-shell";
 import { listings, type Listing } from "@/lib/adex-data";
+import { formatCountdown } from "@/lib/rules";
 import { StoneThumb } from "@/components/adex/stone-gallery";
 import { LandingHero } from "@/components/adex/landing-heroes";
 import { StoneQuickView } from "@/components/adex/stone-quick-view";
@@ -129,7 +130,7 @@ export function LandingPage() {
                   <div className="mt-4 grid grid-cols-3 border-y border-gold/30 py-3 text-center">
                     <span className="text-[10px] uppercase tracking-[0.14em]">{l.status}</span>
                     <span className="border-x border-gold/30 text-[10px] uppercase tracking-[0.14em]">{l.carat}</span>
-                    <span className="truncate px-1 text-[10px] uppercase tracking-[0.14em]">{l.endsIn}</span>
+                    <span className="truncate px-1 text-[10px] uppercase tracking-[0.14em]">{formatCountdown(l.biddingWindowEnd)}</span>
                   </div>
                 </div>
               </article>

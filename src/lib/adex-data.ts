@@ -7,6 +7,9 @@ export const categories = [
   { id: "C162406", name: "Cutting and polishing options", count: 16 },
 ];
 
+/** A buyer's standing on a specific listing — drives dashboard/marketplace/listing-detail CTAs. */
+export type MyBidStatus = "NONE" | "WINNING" | "OUTBID" | "LOCKED_UNPAID" | "WINNER_WAITLISTED";
+
 export type Listing = {
   id: string;
   title: string;
@@ -14,10 +17,18 @@ export type Listing = {
   category: string;
   currentBid: string;
   estimate: string;
-  endsIn: string;
+  /** ISO timestamp the bidding window closes — endsIn/countdowns are derived from this, not stored. */
+  biddingWindowEnd: string;
   origin: string;
   status: string;
+  myBidStatus: MyBidStatus;
+  isShowroomEligible: boolean;
+  isKimberleyApproved: boolean;
 };
+
+function hoursFromNow(hours: number): string {
+  return new Date(Date.now() + hours * 60 * 60 * 1000).toISOString();
+}
 
 export const listings: Listing[] = [
 
@@ -28,9 +39,12 @@ export const listings: Listing[] = [
     category: "Rough diamonds",
     currentBid: "$184,500",
     estimate: "$160,000 – $210,000",
-    endsIn: "2d 14h",
+    biddingWindowEnd: hoursFromNow(2 * 24 + 14),
     origin: "Mbuji-Mayi, DRC",
     status: "Active",
+    myBidStatus: "WINNING",
+    isShowroomEligible: true,
+    isKimberleyApproved: true,
   },
   {
     id: "ADX-S-04409",
@@ -39,9 +53,12 @@ export const listings: Listing[] = [
     category: "Rough diamonds",
     currentBid: "$96,200",
     estimate: "$88,000 – $120,000",
-    endsIn: "1d 03h",
+    biddingWindowEnd: hoursFromNow(1 * 24 + 3),
     origin: "Kono, Sierra Leone",
     status: "Ending",
+    myBidStatus: "OUTBID",
+    isShowroomEligible: false,
+    isKimberleyApproved: true,
   },
   {
     id: "ADX-L-0312",
@@ -50,9 +67,12 @@ export const listings: Listing[] = [
     category: "Parcels of diamonds",
     currentBid: "$210,000",
     estimate: "$195,000 – $240,000",
-    endsIn: "4d 09h",
+    biddingWindowEnd: hoursFromNow(4 * 24 + 9),
     origin: "Tshikapa, DRC",
     status: "Active",
+    myBidStatus: "WINNER_WAITLISTED",
+    isShowroomEligible: true,
+    isKimberleyApproved: true,
   },
   {
     id: "ADX-L-0299",
@@ -61,9 +81,12 @@ export const listings: Listing[] = [
     category: "Baskets of diamonds",
     currentBid: "$74,800",
     estimate: "$70,000 – $95,000",
-    endsIn: "6d 21h",
+    biddingWindowEnd: hoursFromNow(6 * 24 + 21),
     origin: "Kenema, Sierra Leone",
     status: "Scheduled",
+    myBidStatus: "NONE",
+    isShowroomEligible: false,
+    isKimberleyApproved: false,
   },
   {
     id: "ADX-L-0308",
@@ -72,9 +95,12 @@ export const listings: Listing[] = [
     category: "Cutting and polishing options",
     currentBid: "$18,400",
     estimate: "$15,000 – $25,000",
-    endsIn: "3d 02h",
+    biddingWindowEnd: hoursFromNow(3 * 24 + 2),
     origin: "Antwerp partner",
     status: "Active",
+    myBidStatus: "NONE",
+    isShowroomEligible: false,
+    isKimberleyApproved: true,
   },
   {
     id: "ADX-S-04397",
@@ -83,9 +109,12 @@ export const listings: Listing[] = [
     category: "Rough diamonds",
     currentBid: "$41,900",
     estimate: "$38,000 – $52,000",
-    endsIn: "5d 11h",
+    biddingWindowEnd: hoursFromNow(5 * 24 + 11),
     origin: "Mbuji-Mayi, DRC",
     status: "Active",
+    myBidStatus: "LOCKED_UNPAID",
+    isShowroomEligible: false,
+    isKimberleyApproved: true,
   },
 ];
 
@@ -509,7 +538,7 @@ export const kycCases: Row[] = [
   {
     "Case ID": "KYC-9012",
     Applicant: "Kasai Mining SARL",
-    Type: "Seller",
+    Type: "Buyer — Organization",
     "Risk Level": "Medium",
     Reviewer: "R. Mehta",
     Submitted: "14 Aug 2026",
@@ -518,7 +547,7 @@ export const kycCases: Row[] = [
   {
     "Case ID": "KYC-9008",
     Applicant: "Vermeulen Gems",
-    Type: "Buyer",
+    Type: "Buyer — Organization",
     "Risk Level": "Low",
     Reviewer: "R. Mehta",
     Submitted: "12 Aug 2026",
@@ -526,12 +555,69 @@ export const kycCases: Row[] = [
   },
   {
     "Case ID": "AML-4402",
-    Applicant: "Kono Cooperative",
-    Type: "Seller",
+    Applicant: "Kono Cooperative Trading",
+    Type: "Buyer — Organization",
     "Risk Level": "High",
     Reviewer: "L. Okafor",
     Submitted: "09 Aug 2026",
     Status: "Escalated",
+  },
+];
+
+export const amlCases: Row[] = [
+  {
+    "Case ID": "AML-4402",
+    Applicant: "Kono Cooperative Trading",
+    "Risk Level": "High",
+    "Screening Result": "PEP match — director",
+    Reviewer: "L. Okafor",
+    Submitted: "09 Aug 2026",
+    Status: "Escalated",
+  },
+  {
+    "Case ID": "AML-4391",
+    Applicant: "Vermeulen Gems",
+    "Risk Level": "Low",
+    "Screening Result": "No matches",
+    Reviewer: "R. Mehta",
+    Submitted: "05 Aug 2026",
+    Status: "Approved",
+  },
+  {
+    "Case ID": "AML-4380",
+    Applicant: "Sino-Africa Trading Co.",
+    "Risk Level": "Medium",
+    "Screening Result": "Sanctioned-jurisdiction flag",
+    Reviewer: "L. Okafor",
+    Submitted: "01 Aug 2026",
+    Status: "Under Review",
+  },
+];
+
+export const eligibilityCases: Row[] = [
+  {
+    "Case ID": "ELG-1204",
+    Applicant: "Vermeulen Gems",
+    "Buyer Type": "Institutional",
+    "Purchase Limit": "Uncapped",
+    Jurisdiction: "Belgium — Cleared",
+    Status: "Eligible",
+  },
+  {
+    "Case ID": "ELG-1198",
+    Applicant: "Marc Vermeulen (Private)",
+    "Buyer Type": "Private",
+    "Purchase Limit": "$250,000 / cycle",
+    Jurisdiction: "Belgium — Cleared",
+    Status: "Eligible",
+  },
+  {
+    "Case ID": "ELG-1187",
+    Applicant: "Kasai Mining SARL",
+    "Buyer Type": "Institutional",
+    "Purchase Limit": "Uncapped",
+    Jurisdiction: "DRC — Under review",
+    Status: "Under Review",
   },
 ];
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { stoneShots } from "./stone-gallery";
 import type { Listing } from "@/lib/adex-data";
+import { formatCountdown } from "@/lib/rules";
 
 /** Deterministic-but-varied detail so each stone reads individually in quick view. */
 function stoneFacts(stone: Listing) {
@@ -105,7 +106,7 @@ export function StoneQuickView({ stone, onClose }: { stone: Listing; onClose: ()
             {[
               ["Current bid", stone.currentBid],
               ["Estimate", stone.estimate],
-              ["Closes in", stone.endsIn],
+              ["Closes in", formatCountdown(stone.biddingWindowEnd)],
               ["Status", stone.status],
             ].map(([k, v]) => (
               <div key={k} className="bg-background p-4">

@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PublicShell } from "@/components/adex/public-shell";
 import { CertificateCards, StoneGallery, StoneThumb } from "@/components/adex/stone-gallery";
+import { StatusBadge } from "@/components/adex/kit";
+import { BidForm } from "@/components/adex/bid-form";
 import { listings } from "@/lib/adex-data";
+import { formatCountdown } from "@/lib/rules";
+import { useSession } from "@/lib/session";
 
 export const Route = createFileRoute("/listing/$listingId")({
   head: () => ({
@@ -47,6 +52,9 @@ function ListingDetail() {
   const { listingId } = Route.useParams();
   const item = listings.find((l) => l.id === listingId) ?? listings[0]!;
   const alsoSee = listings.filter((l) => l.id !== item.id).slice(0, 3);
+  const { isCleared } = useSession();
+  const [watching, setWatching] = useState(false);
+  const [placedBid, setPlacedBid] = useState<number | null>(null);
 
   return (
     <PublicShell bleed>
@@ -82,6 +90,15 @@ function ListingDetail() {
               Every lot on ADEX travels with a complete certification file. Documents are verified
               at the Kinshasa hub before the stone is presented to European buyers.
             </p>
+            <div className="mt-6 flex items-center gap-3 border border-border p-4">
+              <StatusBadge value={item.isKimberleyApproved ? "Approved" : "Pending"} />
+              <p className="text-sm">
+                Kimberley Process certificate{" "}
+                {item.isKimberleyApproved
+                  ? "verified — clears this stone for export."
+                  : "not yet issued — required before export documentation can be generated."}
+              </p>
+            </div>
             <div className="mt-8">
               <CertificateCards />
             </div>
@@ -104,8 +121,19 @@ function ListingDetail() {
 
         {/* Bidding rail */}
         <aside className="lg:sticky lg:top-8 lg:self-start">
-          <p className="adex-eyebrow">{item.category}</p>
-          <h1 className="font-display mt-4 text-4xl leading-tight">{item.title}</h1>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="adex-eyebrow">{item.category}</p>
+              <h1 className="font-display mt-4 text-4xl leading-tight">{item.title}</h1>
+            </div>
+            <button
+              type="button"
+              onClick={() => setWatching((w) => !w)}
+              className="adex-nav shrink-0 border border-input px-4 py-2 transition-colors hover:bg-muted"
+            >
+              {watching ? "Watching ★" : "Watch ☆"}
+            </button>
+          </div>
           <p className="mt-3 text-sm text-muted-foreground">
             {item.id} · {item.carat} · {item.origin}
           </p>
@@ -115,31 +143,30 @@ function ListingDetail() {
               <p className="adex-eyebrow">Current bid</p>
               <p className="font-display mt-2 text-4xl">{item.currentBid}</p>
               <p className="mt-2 text-xs text-muted-foreground">
-                Estimate {item.estimate} · closes in {item.endsIn}
+                Estimate {item.estimate} · closes in {formatCountdown(item.biddingWindowEnd)}
               </p>
               <span className="adex-shine mt-5 block h-px w-full" />
             </div>
             <div className="p-6">
-              <label className="adex-eyebrow block">
-                Your bid (USD)
-                <input
-                  placeholder="190,000"
-                  className="font-display mt-3 w-full border-b border-input bg-transparent pb-2 text-2xl tracking-normal text-foreground normal-case placeholder:text-muted-foreground focus:border-gold focus:outline-none"
+              {placedBid !== null ? (
+                <p className="text-sm font-semibold">
+                  Bid of {placedBid.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })} submitted.
+                </p>
+              ) : (
+                <BidForm
+                  estimate={item.estimate}
+                  currentBid={item.currentBid}
+                  onSubmit={(amount) => setPlacedBid(amount)}
                 />
-              </label>
-              <button className="adex-nav mt-6 w-full bg-primary py-4 text-primary-foreground transition-opacity hover:opacity-90">
-                Place bid
-              </button>
-              <Link
-                to="/sign-in"
-                className="adex-nav mt-3 block w-full border border-input py-4 text-center transition-colors hover:bg-muted"
-              >
-                Sign in to bid
-              </Link>
-              <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                Bidding is reserved for approved buyers with completed KYC and AML checks. European
-                settlement in EUR or USD.
-              </p>
+              )}
+              {!isCleared ? (
+                <Link
+                  to="/sign-in"
+                  className="adex-nav mt-3 block w-full border border-input py-4 text-center transition-colors hover:bg-muted"
+                >
+                  Sign in to bid
+                </Link>
+              ) : null}
             </div>
           </div>
 
