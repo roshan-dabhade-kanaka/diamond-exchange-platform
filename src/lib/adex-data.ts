@@ -716,6 +716,27 @@ export const auditLogs: Row[] = [
   },
 ];
 
+/** Escrow/settlement status for a completed sale — mirrors diamond-commerce-platform's EscrowStatus. */
+export type EscrowStatus = "PENDING" | "HELD" | "DISTRIBUTED";
+
+export type Settlement = {
+  batch: string;
+  seller: string;
+  stones: number;
+  totalAmount: number;
+  escrowStatus: EscrowStatus;
+  /** ISO date the sale closed — drives the dashboard's date-range filter. */
+  soldAt: string;
+};
+
+export const settlements: Settlement[] = [
+  { batch: "PAY-4471", seller: "Kasai Cooperative 12", stones: 3, totalAmount: 164_300, escrowStatus: "HELD", soldAt: "2026-08-17" },
+  { batch: "PAY-4468", seller: "Tshikapa Group", stones: 1, totalAmount: 388_000, escrowStatus: "HELD", soldAt: "2026-08-12" },
+  { batch: "PAY-4460", seller: "Mbuji-Mayi Artisanal", stones: 2, totalAmount: 61_750, escrowStatus: "DISTRIBUTED", soldAt: "2026-08-05" },
+  { batch: "PAY-4451", seller: "Kono Cooperative", stones: 4, totalAmount: 210_000, escrowStatus: "DISTRIBUTED", soldAt: "2026-07-28" },
+  { batch: "PAY-4439", seller: "Kasai Cooperative 12", stones: 1, totalAmount: 96_200, escrowStatus: "DISTRIBUTED", soldAt: "2026-07-14" },
+];
+
 export const revenueSeries = [
   { period: "Mar", revenue: 4.1, volume: 210 },
   { period: "Apr", revenue: 5.2, volume: 248 },

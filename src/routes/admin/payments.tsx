@@ -1,15 +1,10 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
-import {
-  DataTable,
-  GhostButton,
-  GoldButton,
-  KpiGrid,
-  PageHeader,
-  Panel,
-  Timeline,
-} from "@/components/adex/kit";
-import type { Row } from "@/lib/adex-data";
+import { DataTable, GoldButton, KpiGrid, PageHeader, Panel, Timeline } from "@/components/adex/kit";
+import { EscrowStatusBadge, SettlementSplitBar } from "@/components/adex/settlement-split";
+import { formatUsd, settlementSplit } from "@/lib/rules";
+import { settlements, type Row } from "@/lib/adex-data";
 
 export const Route = createFileRoute("/admin/payments")({
   head: pageHead(
@@ -46,31 +41,21 @@ const incoming: Row[] = [
   },
 ];
 
-const payouts: Row[] = [
-  {
-    Batch: "PAY-4471",
-    Seller: "Kasai Cooperative 12",
-    Stones: "3",
-    Amount: "$164,300",
-    Status: "Pending",
-  },
-  {
-    Batch: "PAY-4468",
-    Seller: "Tshikapa Group",
-    Stones: "1",
-    Amount: "$388,000",
-    Status: "Approved",
-  },
-  {
-    Batch: "PAY-4460",
-    Seller: "Mbuji-Mayi Artisanal",
-    Stones: "2",
-    Amount: "$61,750",
-    Status: "Completed",
-  },
-];
-
 function AdminPayments() {
+  const [rows, setRows] = useState(settlements);
+
+  const escrowHeldTotal = rows
+    .filter((s) => s.escrowStatus === "HELD")
+    .reduce((sum, s) => sum + s.totalAmount, 0);
+  const distributedTotal = rows
+    .filter((s) => s.escrowStatus === "DISTRIBUTED")
+    .reduce((sum, s) => sum + s.totalAmount, 0);
+  const minerShareTotal = rows.reduce((sum, s) => sum + settlementSplit(s.totalAmount).miner, 0);
+
+  function releasePayout(batch: string) {
+    setRows((prev) => prev.map((s) => (s.batch === batch ? { ...s, escrowStatus: "DISTRIBUTED" } : s)));
+  }
+
   return (
     <>
       <PageHeader
@@ -89,9 +74,9 @@ function AdminPayments() {
       <KpiGrid
         items={[
           { label: "Awaiting confirmation", value: "$601,120" },
-          { label: "Overdue", value: "1" },
-          { label: "Payouts pending", value: "$164,300" },
-          { label: "Settled this month", value: "$2.41M" },
+          { label: "Escrow held", value: formatUsd(escrowHeldTotal) },
+          { label: "Distributed", value: formatUsd(distributedTotal) },
+          { label: "Miner share total", value: formatUsd(minerShareTotal) },
         ]}
       />
 
@@ -103,11 +88,36 @@ function AdminPayments() {
           <DataTable rows={incoming} />
         </Panel>
 
-        <Panel
-          title="Settling seller payment"
-          action={<GhostButton className="h-8 px-4">Approve batch</GhostButton>}
-        >
-          <DataTable rows={payouts} />
+        <Panel title="Settling seller payment — Ops / Miner / Partner split">
+          <div className="space-y-4">
+            {rows.map((s) => (
+              <div key={s.batch} className="border border-border p-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold">
+                      {s.batch} — {s.seller}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {s.stones} stone{s.stones > 1 ? "s" : ""} · {formatUsd(s.totalAmount)} total
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <EscrowStatusBadge status={s.escrowStatus} />
+                    {s.escrowStatus === "HELD" ? (
+                      <GoldButton
+                        className="h-8 px-4"
+                        type="button"
+                        onClick={() => releasePayout(s.batch)}
+                      >
+                        Release payout
+                      </GoldButton>
+                    ) : null}
+                  </div>
+                </div>
+                <SettlementSplitBar total={s.totalAmount} className="mt-4" />
+              </div>
+            ))}
+          </div>
         </Panel>
 
         <Panel title="Settlement flow">

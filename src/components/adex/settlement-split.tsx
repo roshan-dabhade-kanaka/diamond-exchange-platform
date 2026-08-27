@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { formatUsd, OPS_SHARE_PERCENT, MINER_SHARE_PERCENT, PARTNER_SHARE_PERCENT, settlementSplit } from "@/lib/rules";
+import type { EscrowStatus } from "@/lib/adex-data";
 
 /**
  * Shared Ops / Miner / Partner settlement-split visualization — the piece
@@ -9,7 +10,7 @@ import { formatUsd, OPS_SHARE_PERCENT, MINER_SHARE_PERCENT, PARTNER_SHARE_PERCEN
  * See specs/2026-08-27-buyer-admin-build-plan.md.
  */
 
-export type EscrowStatus = "PENDING" | "HELD" | "DISTRIBUTED";
+export type { EscrowStatus };
 
 export function SettlementSplitBar({
   total,
