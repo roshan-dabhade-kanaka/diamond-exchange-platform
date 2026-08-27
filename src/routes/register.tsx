@@ -5,13 +5,13 @@ import { FormGrid, GoldButton, Panel, Timeline } from "@/components/adex/kit";
 export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
-      { title: "Register a seller or buyer account | ADEX" },
+      { title: "Register a buyer account | ADEX" },
       {
         name: "description",
         content:
-          "Create an ADEX account as a miner, individual seller, organization or buyer and begin KYC and AML verification.",
+          "Create an ADEX buyer account as an organization or individual and begin KYC and AML verification.",
       },
-      { property: "og:title", content: "Register a seller or buyer account | ADEX" },
+      { property: "og:title", content: "Register a buyer account | ADEX" },
       {
         property: "og:description",
         content: "Onboard to the ADEX exchange with verified identity and compliance checks.",
@@ -31,7 +31,7 @@ function Register() {
             <fieldset>
               <legend className="font-display mb-3 text-base">Account type</legend>
               <div className="flex flex-wrap gap-4 text-sm font-semibold">
-                {["Miner", "Individual seller", "Organization", "Buyer"].map((t) => (
+                {["Individual", "Organization"].map((t) => (
                   <label key={t} className="flex items-center gap-2">
                     <input type="radio" name="type" className="accent-[var(--gold)]" /> {t}
                   </label>

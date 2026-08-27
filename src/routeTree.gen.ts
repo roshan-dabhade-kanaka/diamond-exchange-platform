@@ -16,7 +16,6 @@ import { Route as BuyerRouteRouteImport } from './routes/buyer/route'
 import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SearchRouteImport } from './routes/search'
-import { Route as SellerRouteRouteImport } from './routes/seller/route'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAuctionsRouteImport } from './routes/admin/auctions'
@@ -52,27 +51,12 @@ import { Route as BuyerWatchlistRouteImport } from './routes/buyer/watchlist'
 import { Route as HouseHouseRouteImport } from './routes/house.$house'
 import { Route as ListingListingIdRouteImport } from './routes/listing.$listingId'
 import { Route as LotsLotIdRouteImport } from './routes/lots/$lotId'
-import { Route as SellerIndexRouteImport } from './routes/seller/index'
-import { Route as SellerAuctionsRouteImport } from './routes/seller/auctions'
-import { Route as SellerCertificatesRouteImport } from './routes/seller/certificates'
-import { Route as SellerKycRouteImport } from './routes/seller/kyc'
-import { Route as SellerNotificationsRouteImport } from './routes/seller/notifications'
-import { Route as SellerPaymentsRouteImport } from './routes/seller/payments'
-import { Route as SellerProfileRouteImport } from './routes/seller/profile'
-import { Route as SellerShipmentsRouteImport } from './routes/seller/shipments'
-import { Route as SellerValuationRouteImport } from './routes/seller/valuation'
 import { Route as StonesStoneIdRouteImport } from './routes/stones/$stoneId'
 import { Route as AdminLotLotIdRouteImport } from './routes/admin/lot/$lotId'
 import { Route as AdminLotsLotIdRouteImport } from './routes/admin/lots/$lotId'
 import { Route as AdminStoneStoneIdRouteImport } from './routes/admin/stone/$stoneId'
 import { Route as AdminStonesIndexRouteImport } from './routes/admin/stones/index'
 import { Route as AdminStonesStoneIdRouteImport } from './routes/admin/stones/$stoneId'
-import { Route as SellerLotLotIdRouteImport } from './routes/seller/lot/$lotId'
-import { Route as SellerLotsIndexRouteImport } from './routes/seller/lots/index'
-import { Route as SellerLotsLotIdRouteImport } from './routes/seller/lots/$lotId'
-import { Route as SellerStoneStoneIdRouteImport } from './routes/seller/stone/$stoneId'
-import { Route as SellerStonesIndexRouteImport } from './routes/seller/stones/index'
-import { Route as SellerStonesStoneIdRouteImport } from './routes/seller/stones/$stoneId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -107,11 +91,6 @@ const RegisterRoute = RegisterRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SellerRouteRoute = SellerRouteRouteImport.update({
-  id: '/seller',
-  path: '/seller',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignInRoute = SignInRouteImport.update({
@@ -289,51 +268,6 @@ const LotsLotIdRoute = LotsLotIdRouteImport.update({
   path: '/lots/$lotId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SellerIndexRoute = SellerIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerAuctionsRoute = SellerAuctionsRouteImport.update({
-  id: '/auctions',
-  path: '/auctions',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerCertificatesRoute = SellerCertificatesRouteImport.update({
-  id: '/certificates',
-  path: '/certificates',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerKycRoute = SellerKycRouteImport.update({
-  id: '/kyc',
-  path: '/kyc',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerNotificationsRoute = SellerNotificationsRouteImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerPaymentsRoute = SellerPaymentsRouteImport.update({
-  id: '/payments',
-  path: '/payments',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerProfileRoute = SellerProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerShipmentsRoute = SellerShipmentsRouteImport.update({
-  id: '/shipments',
-  path: '/shipments',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerValuationRoute = SellerValuationRouteImport.update({
-  id: '/valuation',
-  path: '/valuation',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
 const StonesStoneIdRoute = StonesStoneIdRouteImport.update({
   id: '/stones/$stoneId',
   path: '/stones/$stoneId',
@@ -364,42 +298,11 @@ const AdminStonesStoneIdRoute = AdminStonesStoneIdRouteImport.update({
   path: '/stones/$stoneId',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const SellerLotLotIdRoute = SellerLotLotIdRouteImport.update({
-  id: '/lot/$lotId',
-  path: '/lot/$lotId',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerLotsIndexRoute = SellerLotsIndexRouteImport.update({
-  id: '/lots/',
-  path: '/lots/',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerLotsLotIdRoute = SellerLotsLotIdRouteImport.update({
-  id: '/lots/$lotId',
-  path: '/lots/$lotId',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerStoneStoneIdRoute = SellerStoneStoneIdRouteImport.update({
-  id: '/stone/$stoneId',
-  path: '/stone/$stoneId',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerStonesIndexRoute = SellerStonesIndexRouteImport.update({
-  id: '/stones/',
-  path: '/stones/',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
-const SellerStonesStoneIdRoute = SellerStonesStoneIdRouteImport.update({
-  id: '/stones/$stoneId',
-  path: '/stones/$stoneId',
-  getParentRoute: () => SellerRouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/buyer': typeof BuyerRouteRouteWithChildren
-  '/seller': typeof SellerRouteRouteWithChildren
   '/browse': typeof BrowseRoute
   '/collection': typeof CollectionRoute
   '/register': typeof RegisterRoute
@@ -437,29 +340,14 @@ export interface FileRoutesByFullPath {
   '/house/$house': typeof HouseHouseRoute
   '/listing/$listingId': typeof ListingListingIdRoute
   '/lots/$lotId': typeof LotsLotIdRoute
-  '/seller/auctions': typeof SellerAuctionsRoute
-  '/seller/certificates': typeof SellerCertificatesRoute
-  '/seller/kyc': typeof SellerKycRoute
-  '/seller/notifications': typeof SellerNotificationsRoute
-  '/seller/payments': typeof SellerPaymentsRoute
-  '/seller/profile': typeof SellerProfileRoute
-  '/seller/shipments': typeof SellerShipmentsRoute
-  '/seller/valuation': typeof SellerValuationRoute
   '/stones/$stoneId': typeof StonesStoneIdRoute
   '/admin/': typeof AdminIndexRoute
   '/buyer/': typeof BuyerIndexRoute
-  '/seller/': typeof SellerIndexRoute
   '/admin/lot/$lotId': typeof AdminLotLotIdRoute
   '/admin/lots/$lotId': typeof AdminLotsLotIdRoute
   '/admin/stone/$stoneId': typeof AdminStoneStoneIdRoute
   '/admin/stones/$stoneId': typeof AdminStonesStoneIdRoute
-  '/seller/lot/$lotId': typeof SellerLotLotIdRoute
-  '/seller/lots/$lotId': typeof SellerLotsLotIdRoute
-  '/seller/stone/$stoneId': typeof SellerStoneStoneIdRoute
-  '/seller/stones/$stoneId': typeof SellerStonesStoneIdRoute
   '/admin/stones/': typeof AdminStonesIndexRoute
-  '/seller/lots/': typeof SellerLotsIndexRoute
-  '/seller/stones/': typeof SellerStonesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -500,36 +388,20 @@ export interface FileRoutesByTo {
   '/house/$house': typeof HouseHouseRoute
   '/listing/$listingId': typeof ListingListingIdRoute
   '/lots/$lotId': typeof LotsLotIdRoute
-  '/seller/auctions': typeof SellerAuctionsRoute
-  '/seller/certificates': typeof SellerCertificatesRoute
-  '/seller/kyc': typeof SellerKycRoute
-  '/seller/notifications': typeof SellerNotificationsRoute
-  '/seller/payments': typeof SellerPaymentsRoute
-  '/seller/profile': typeof SellerProfileRoute
-  '/seller/shipments': typeof SellerShipmentsRoute
-  '/seller/valuation': typeof SellerValuationRoute
   '/stones/$stoneId': typeof StonesStoneIdRoute
   '/admin': typeof AdminIndexRoute
   '/buyer': typeof BuyerIndexRoute
-  '/seller': typeof SellerIndexRoute
   '/admin/lot/$lotId': typeof AdminLotLotIdRoute
   '/admin/lots/$lotId': typeof AdminLotsLotIdRoute
   '/admin/stone/$stoneId': typeof AdminStoneStoneIdRoute
   '/admin/stones/$stoneId': typeof AdminStonesStoneIdRoute
-  '/seller/lot/$lotId': typeof SellerLotLotIdRoute
-  '/seller/lots/$lotId': typeof SellerLotsLotIdRoute
-  '/seller/stone/$stoneId': typeof SellerStoneStoneIdRoute
-  '/seller/stones/$stoneId': typeof SellerStonesStoneIdRoute
   '/admin/stones': typeof AdminStonesIndexRoute
-  '/seller/lots': typeof SellerLotsIndexRoute
-  '/seller/stones': typeof SellerStonesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/buyer': typeof BuyerRouteRouteWithChildren
-  '/seller': typeof SellerRouteRouteWithChildren
   '/browse': typeof BrowseRoute
   '/collection': typeof CollectionRoute
   '/register': typeof RegisterRoute
@@ -567,29 +439,14 @@ export interface FileRoutesById {
   '/house/$house': typeof HouseHouseRoute
   '/listing/$listingId': typeof ListingListingIdRoute
   '/lots/$lotId': typeof LotsLotIdRoute
-  '/seller/auctions': typeof SellerAuctionsRoute
-  '/seller/certificates': typeof SellerCertificatesRoute
-  '/seller/kyc': typeof SellerKycRoute
-  '/seller/notifications': typeof SellerNotificationsRoute
-  '/seller/payments': typeof SellerPaymentsRoute
-  '/seller/profile': typeof SellerProfileRoute
-  '/seller/shipments': typeof SellerShipmentsRoute
-  '/seller/valuation': typeof SellerValuationRoute
   '/stones/$stoneId': typeof StonesStoneIdRoute
   '/admin/': typeof AdminIndexRoute
   '/buyer/': typeof BuyerIndexRoute
-  '/seller/': typeof SellerIndexRoute
   '/admin/lot/$lotId': typeof AdminLotLotIdRoute
   '/admin/lots/$lotId': typeof AdminLotsLotIdRoute
   '/admin/stone/$stoneId': typeof AdminStoneStoneIdRoute
   '/admin/stones/$stoneId': typeof AdminStonesStoneIdRoute
-  '/seller/lot/$lotId': typeof SellerLotLotIdRoute
-  '/seller/lots/$lotId': typeof SellerLotsLotIdRoute
-  '/seller/stone/$stoneId': typeof SellerStoneStoneIdRoute
-  '/seller/stones/$stoneId': typeof SellerStonesStoneIdRoute
   '/admin/stones/': typeof AdminStonesIndexRoute
-  '/seller/lots/': typeof SellerLotsIndexRoute
-  '/seller/stones/': typeof SellerStonesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -597,7 +454,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/buyer'
-    | '/seller'
     | '/browse'
     | '/collection'
     | '/register'
@@ -635,29 +491,14 @@ export interface FileRouteTypes {
     | '/house/$house'
     | '/listing/$listingId'
     | '/lots/$lotId'
-    | '/seller/auctions'
-    | '/seller/certificates'
-    | '/seller/kyc'
-    | '/seller/notifications'
-    | '/seller/payments'
-    | '/seller/profile'
-    | '/seller/shipments'
-    | '/seller/valuation'
     | '/stones/$stoneId'
     | '/admin/'
     | '/buyer/'
-    | '/seller/'
     | '/admin/lot/$lotId'
     | '/admin/lots/$lotId'
     | '/admin/stone/$stoneId'
     | '/admin/stones/$stoneId'
-    | '/seller/lot/$lotId'
-    | '/seller/lots/$lotId'
-    | '/seller/stone/$stoneId'
-    | '/seller/stones/$stoneId'
     | '/admin/stones/'
-    | '/seller/lots/'
-    | '/seller/stones/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -698,35 +539,19 @@ export interface FileRouteTypes {
     | '/house/$house'
     | '/listing/$listingId'
     | '/lots/$lotId'
-    | '/seller/auctions'
-    | '/seller/certificates'
-    | '/seller/kyc'
-    | '/seller/notifications'
-    | '/seller/payments'
-    | '/seller/profile'
-    | '/seller/shipments'
-    | '/seller/valuation'
     | '/stones/$stoneId'
     | '/admin'
     | '/buyer'
-    | '/seller'
     | '/admin/lot/$lotId'
     | '/admin/lots/$lotId'
     | '/admin/stone/$stoneId'
     | '/admin/stones/$stoneId'
-    | '/seller/lot/$lotId'
-    | '/seller/lots/$lotId'
-    | '/seller/stone/$stoneId'
-    | '/seller/stones/$stoneId'
     | '/admin/stones'
-    | '/seller/lots'
-    | '/seller/stones'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/buyer'
-    | '/seller'
     | '/browse'
     | '/collection'
     | '/register'
@@ -764,36 +589,20 @@ export interface FileRouteTypes {
     | '/house/$house'
     | '/listing/$listingId'
     | '/lots/$lotId'
-    | '/seller/auctions'
-    | '/seller/certificates'
-    | '/seller/kyc'
-    | '/seller/notifications'
-    | '/seller/payments'
-    | '/seller/profile'
-    | '/seller/shipments'
-    | '/seller/valuation'
     | '/stones/$stoneId'
     | '/admin/'
     | '/buyer/'
-    | '/seller/'
     | '/admin/lot/$lotId'
     | '/admin/lots/$lotId'
     | '/admin/stone/$stoneId'
     | '/admin/stones/$stoneId'
-    | '/seller/lot/$lotId'
-    | '/seller/lots/$lotId'
-    | '/seller/stone/$stoneId'
-    | '/seller/stones/$stoneId'
     | '/admin/stones/'
-    | '/seller/lots/'
-    | '/seller/stones/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   BuyerRouteRoute: typeof BuyerRouteRouteWithChildren
-  SellerRouteRoute: typeof SellerRouteRouteWithChildren
   BrowseRoute: typeof BrowseRoute
   CollectionRoute: typeof CollectionRoute
   RegisterRoute: typeof RegisterRoute
@@ -854,13 +663,6 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/seller': {
-      id: '/seller'
-      path: '/seller'
-      fullPath: '/seller'
-      preLoaderRoute: typeof SellerRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sign-in': {
@@ -1108,69 +910,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LotsLotIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/seller/': {
-      id: '/seller/'
-      path: '/'
-      fullPath: '/seller/'
-      preLoaderRoute: typeof SellerIndexRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/auctions': {
-      id: '/seller/auctions'
-      path: '/auctions'
-      fullPath: '/seller/auctions'
-      preLoaderRoute: typeof SellerAuctionsRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/certificates': {
-      id: '/seller/certificates'
-      path: '/certificates'
-      fullPath: '/seller/certificates'
-      preLoaderRoute: typeof SellerCertificatesRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/kyc': {
-      id: '/seller/kyc'
-      path: '/kyc'
-      fullPath: '/seller/kyc'
-      preLoaderRoute: typeof SellerKycRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/notifications': {
-      id: '/seller/notifications'
-      path: '/notifications'
-      fullPath: '/seller/notifications'
-      preLoaderRoute: typeof SellerNotificationsRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/payments': {
-      id: '/seller/payments'
-      path: '/payments'
-      fullPath: '/seller/payments'
-      preLoaderRoute: typeof SellerPaymentsRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/profile': {
-      id: '/seller/profile'
-      path: '/profile'
-      fullPath: '/seller/profile'
-      preLoaderRoute: typeof SellerProfileRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/shipments': {
-      id: '/seller/shipments'
-      path: '/shipments'
-      fullPath: '/seller/shipments'
-      preLoaderRoute: typeof SellerShipmentsRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/valuation': {
-      id: '/seller/valuation'
-      path: '/valuation'
-      fullPath: '/seller/valuation'
-      preLoaderRoute: typeof SellerValuationRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
     '/stones/$stoneId': {
       id: '/stones/$stoneId'
       path: '/stones/$stoneId'
@@ -1212,48 +951,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/stones/$stoneId'
       preLoaderRoute: typeof AdminStonesStoneIdRouteImport
       parentRoute: typeof AdminRouteRoute
-    }
-    '/seller/lot/$lotId': {
-      id: '/seller/lot/$lotId'
-      path: '/lot/$lotId'
-      fullPath: '/seller/lot/$lotId'
-      preLoaderRoute: typeof SellerLotLotIdRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/lots/': {
-      id: '/seller/lots/'
-      path: '/lots'
-      fullPath: '/seller/lots/'
-      preLoaderRoute: typeof SellerLotsIndexRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/lots/$lotId': {
-      id: '/seller/lots/$lotId'
-      path: '/lots/$lotId'
-      fullPath: '/seller/lots/$lotId'
-      preLoaderRoute: typeof SellerLotsLotIdRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/stone/$stoneId': {
-      id: '/seller/stone/$stoneId'
-      path: '/stone/$stoneId'
-      fullPath: '/seller/stone/$stoneId'
-      preLoaderRoute: typeof SellerStoneStoneIdRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/stones/': {
-      id: '/seller/stones/'
-      path: '/stones'
-      fullPath: '/seller/stones/'
-      preLoaderRoute: typeof SellerStonesIndexRouteImport
-      parentRoute: typeof SellerRouteRoute
-    }
-    '/seller/stones/$stoneId': {
-      id: '/seller/stones/$stoneId'
-      path: '/stones/$stoneId'
-      fullPath: '/seller/stones/$stoneId'
-      preLoaderRoute: typeof SellerStonesStoneIdRouteImport
-      parentRoute: typeof SellerRouteRoute
     }
   }
 }
@@ -1350,51 +1047,10 @@ const BuyerRouteRouteWithChildren = BuyerRouteRoute._addFileChildren(
   BuyerRouteRouteChildren,
 )
 
-interface SellerRouteRouteChildren {
-  SellerAuctionsRoute: typeof SellerAuctionsRoute
-  SellerCertificatesRoute: typeof SellerCertificatesRoute
-  SellerKycRoute: typeof SellerKycRoute
-  SellerNotificationsRoute: typeof SellerNotificationsRoute
-  SellerPaymentsRoute: typeof SellerPaymentsRoute
-  SellerProfileRoute: typeof SellerProfileRoute
-  SellerShipmentsRoute: typeof SellerShipmentsRoute
-  SellerValuationRoute: typeof SellerValuationRoute
-  SellerIndexRoute: typeof SellerIndexRoute
-  SellerLotLotIdRoute: typeof SellerLotLotIdRoute
-  SellerLotsLotIdRoute: typeof SellerLotsLotIdRoute
-  SellerStoneStoneIdRoute: typeof SellerStoneStoneIdRoute
-  SellerStonesStoneIdRoute: typeof SellerStonesStoneIdRoute
-  SellerLotsIndexRoute: typeof SellerLotsIndexRoute
-  SellerStonesIndexRoute: typeof SellerStonesIndexRoute
-}
-
-const SellerRouteRouteChildren: SellerRouteRouteChildren = {
-  SellerAuctionsRoute: SellerAuctionsRoute,
-  SellerCertificatesRoute: SellerCertificatesRoute,
-  SellerKycRoute: SellerKycRoute,
-  SellerNotificationsRoute: SellerNotificationsRoute,
-  SellerPaymentsRoute: SellerPaymentsRoute,
-  SellerProfileRoute: SellerProfileRoute,
-  SellerShipmentsRoute: SellerShipmentsRoute,
-  SellerValuationRoute: SellerValuationRoute,
-  SellerIndexRoute: SellerIndexRoute,
-  SellerLotLotIdRoute: SellerLotLotIdRoute,
-  SellerLotsLotIdRoute: SellerLotsLotIdRoute,
-  SellerStoneStoneIdRoute: SellerStoneStoneIdRoute,
-  SellerStonesStoneIdRoute: SellerStonesStoneIdRoute,
-  SellerLotsIndexRoute: SellerLotsIndexRoute,
-  SellerStonesIndexRoute: SellerStonesIndexRoute,
-}
-
-const SellerRouteRouteWithChildren = SellerRouteRoute._addFileChildren(
-  SellerRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
   BuyerRouteRoute: BuyerRouteRouteWithChildren,
-  SellerRouteRoute: SellerRouteRouteWithChildren,
   BrowseRoute: BrowseRoute,
   CollectionRoute: CollectionRoute,
   RegisterRoute: RegisterRoute,

@@ -115,14 +115,8 @@ export function PublicShell({
 
 export function PortalEntryLinks() {
   return (
-    <div className="grid gap-px bg-border sm:grid-cols-3">
+    <div className="grid gap-px bg-border sm:grid-cols-2">
       {[
-        {
-          to: "/seller",
-          eyebrow: "Supply",
-          label: "Seller / Miner Portal",
-          desc: "Register stones, track valuation, sales and payments.",
-        },
         {
           to: "/buyer",
           eyebrow: "Acquire",

@@ -125,12 +125,12 @@ const statusKeys = [
   "result",
 ];
 
-export type RecordBase = "seller" | "admin" | "buyer";
+export type RecordBase = "admin" | "buyer";
 
 /** Renders an ADEX Stone/Lot ID as a link to its single record page. */
 export function RecordLink({
   value,
-  base = "seller",
+  base = "admin",
   className,
 }: {
   value: string;
@@ -150,22 +150,14 @@ export function RecordLink({
     );
   }
   if (isStone) {
-    return base === "admin" ? (
+    return (
       <Link to="/admin/stones/$stoneId" params={{ stoneId: value }} className={cls}>
-        {value}
-      </Link>
-    ) : (
-      <Link to="/seller/stones/$stoneId" params={{ stoneId: value }} className={cls}>
         {value}
       </Link>
     );
   }
-  return base === "admin" ? (
+  return (
     <Link to="/admin/lots/$lotId" params={{ lotId: value }} className={cls}>
-      {value}
-    </Link>
-  ) : (
-    <Link to="/seller/lots/$lotId" params={{ lotId: value }} className={cls}>
       {value}
     </Link>
   );

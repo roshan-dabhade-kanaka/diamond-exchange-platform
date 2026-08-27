@@ -9,7 +9,7 @@ export const Route = createFileRoute("/sign-in")({
       {
         name: "description",
         content:
-          "Sign in to the ADEX seller, buyer or admin portal to manage stones, bids, orders and compliance.",
+          "Sign in to the ADEX buyer or admin portal to manage stones, bids, orders and compliance.",
       },
       { property: "og:title", content: "Sign in to ADEX" },
       { property: "og:description", content: "Secure access to the ADEX diamond exchange portals." },
@@ -55,11 +55,6 @@ function SignIn() {
         <div className="adex-panel mt-6 p-4 text-sm">
           <p className="font-semibold">Continue to a demo portal</p>
           <ul className="mt-2 space-y-1">
-            <li>
-              <Link to="/seller" className="adex-link">
-                Seller / Miner portal
-              </Link>
-            </li>
             <li>
               <Link to="/buyer" className="adex-link">
                 Buyer portal
