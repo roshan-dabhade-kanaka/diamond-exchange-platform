@@ -22,14 +22,17 @@ import { Route as AdminAuctionsRouteImport } from './routes/admin/auctions'
 import { Route as AdminAuditRouteImport } from './routes/admin/audit'
 import { Route as AdminConfigRouteImport } from './routes/admin/config'
 import { Route as AdminIntakeRouteImport } from './routes/admin/intake'
+import { Route as AdminIntegrationsRouteImport } from './routes/admin/integrations'
 import { Route as AdminInventoryRouteImport } from './routes/admin/inventory'
 import { Route as AdminKycRouteImport } from './routes/admin/kyc'
 import { Route as AdminLogisticsRouteImport } from './routes/admin/logistics'
 import { Route as AdminNewAuctionRouteImport } from './routes/admin/new-auction'
 import { Route as AdminPartnersRouteImport } from './routes/admin/partners'
 import { Route as AdminPaymentsRouteImport } from './routes/admin/payments'
+import { Route as AdminProfileRouteImport } from './routes/admin/profile'
 import { Route as AdminRegisterUserRouteImport } from './routes/admin/register-user'
 import { Route as AdminReportsRouteImport } from './routes/admin/reports'
+import { Route as AdminShowroomRouteImport } from './routes/admin/showroom'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminValuationRouteImport } from './routes/admin/valuation'
 import { Route as BuyerIndexRouteImport } from './routes/buyer/index'
@@ -123,6 +126,11 @@ const AdminIntakeRoute = AdminIntakeRouteImport.update({
   path: '/intake',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminIntegrationsRoute = AdminIntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminInventoryRoute = AdminInventoryRouteImport.update({
   id: '/inventory',
   path: '/inventory',
@@ -153,6 +161,11 @@ const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminProfileRoute = AdminProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminRegisterUserRoute = AdminRegisterUserRouteImport.update({
   id: '/register-user',
   path: '/register-user',
@@ -161,6 +174,11 @@ const AdminRegisterUserRoute = AdminRegisterUserRouteImport.update({
 const AdminReportsRoute = AdminReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminShowroomRoute = AdminShowroomRouteImport.update({
+  id: '/showroom',
+  path: '/showroom',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
@@ -312,14 +330,17 @@ export interface FileRoutesByFullPath {
   '/admin/audit': typeof AdminAuditRoute
   '/admin/config': typeof AdminConfigRoute
   '/admin/intake': typeof AdminIntakeRoute
+  '/admin/integrations': typeof AdminIntegrationsRoute
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/kyc': typeof AdminKycRoute
   '/admin/logistics': typeof AdminLogisticsRoute
   '/admin/new-auction': typeof AdminNewAuctionRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/admin/register-user': typeof AdminRegisterUserRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/showroom': typeof AdminShowroomRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/valuation': typeof AdminValuationRoute
   '/buyer/analysis': typeof BuyerAnalysisRoute
@@ -360,14 +381,17 @@ export interface FileRoutesByTo {
   '/admin/audit': typeof AdminAuditRoute
   '/admin/config': typeof AdminConfigRoute
   '/admin/intake': typeof AdminIntakeRoute
+  '/admin/integrations': typeof AdminIntegrationsRoute
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/kyc': typeof AdminKycRoute
   '/admin/logistics': typeof AdminLogisticsRoute
   '/admin/new-auction': typeof AdminNewAuctionRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/admin/register-user': typeof AdminRegisterUserRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/showroom': typeof AdminShowroomRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/valuation': typeof AdminValuationRoute
   '/buyer/analysis': typeof BuyerAnalysisRoute
@@ -411,14 +435,17 @@ export interface FileRoutesById {
   '/admin/audit': typeof AdminAuditRoute
   '/admin/config': typeof AdminConfigRoute
   '/admin/intake': typeof AdminIntakeRoute
+  '/admin/integrations': typeof AdminIntegrationsRoute
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/kyc': typeof AdminKycRoute
   '/admin/logistics': typeof AdminLogisticsRoute
   '/admin/new-auction': typeof AdminNewAuctionRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/admin/register-user': typeof AdminRegisterUserRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/showroom': typeof AdminShowroomRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/valuation': typeof AdminValuationRoute
   '/buyer/analysis': typeof BuyerAnalysisRoute
@@ -463,14 +490,17 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/config'
     | '/admin/intake'
+    | '/admin/integrations'
     | '/admin/inventory'
     | '/admin/kyc'
     | '/admin/logistics'
     | '/admin/new-auction'
     | '/admin/partners'
     | '/admin/payments'
+    | '/admin/profile'
     | '/admin/register-user'
     | '/admin/reports'
+    | '/admin/showroom'
     | '/admin/users'
     | '/admin/valuation'
     | '/buyer/analysis'
@@ -511,14 +541,17 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/config'
     | '/admin/intake'
+    | '/admin/integrations'
     | '/admin/inventory'
     | '/admin/kyc'
     | '/admin/logistics'
     | '/admin/new-auction'
     | '/admin/partners'
     | '/admin/payments'
+    | '/admin/profile'
     | '/admin/register-user'
     | '/admin/reports'
+    | '/admin/showroom'
     | '/admin/users'
     | '/admin/valuation'
     | '/buyer/analysis'
@@ -561,14 +594,17 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/config'
     | '/admin/intake'
+    | '/admin/integrations'
     | '/admin/inventory'
     | '/admin/kyc'
     | '/admin/logistics'
     | '/admin/new-auction'
     | '/admin/partners'
     | '/admin/payments'
+    | '/admin/profile'
     | '/admin/register-user'
     | '/admin/reports'
+    | '/admin/showroom'
     | '/admin/users'
     | '/admin/valuation'
     | '/buyer/analysis'
@@ -707,6 +743,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIntakeRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/integrations': {
+      id: '/admin/integrations'
+      path: '/integrations'
+      fullPath: '/admin/integrations'
+      preLoaderRoute: typeof AdminIntegrationsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/inventory': {
       id: '/admin/inventory'
       path: '/inventory'
@@ -749,6 +792,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPaymentsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/profile': {
+      id: '/admin/profile'
+      path: '/profile'
+      fullPath: '/admin/profile'
+      preLoaderRoute: typeof AdminProfileRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/register-user': {
       id: '/admin/register-user'
       path: '/register-user'
@@ -761,6 +811,13 @@ declare module '@tanstack/react-router' {
       path: '/reports'
       fullPath: '/admin/reports'
       preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/showroom': {
+      id: '/admin/showroom'
+      path: '/showroom'
+      fullPath: '/admin/showroom'
+      preLoaderRoute: typeof AdminShowroomRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/users': {
@@ -960,14 +1017,17 @@ interface AdminRouteRouteChildren {
   AdminAuditRoute: typeof AdminAuditRoute
   AdminConfigRoute: typeof AdminConfigRoute
   AdminIntakeRoute: typeof AdminIntakeRoute
+  AdminIntegrationsRoute: typeof AdminIntegrationsRoute
   AdminInventoryRoute: typeof AdminInventoryRoute
   AdminKycRoute: typeof AdminKycRoute
   AdminLogisticsRoute: typeof AdminLogisticsRoute
   AdminNewAuctionRoute: typeof AdminNewAuctionRoute
   AdminPartnersRoute: typeof AdminPartnersRoute
   AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminProfileRoute: typeof AdminProfileRoute
   AdminRegisterUserRoute: typeof AdminRegisterUserRoute
   AdminReportsRoute: typeof AdminReportsRoute
+  AdminShowroomRoute: typeof AdminShowroomRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminValuationRoute: typeof AdminValuationRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -983,14 +1043,17 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminAuditRoute: AdminAuditRoute,
   AdminConfigRoute: AdminConfigRoute,
   AdminIntakeRoute: AdminIntakeRoute,
+  AdminIntegrationsRoute: AdminIntegrationsRoute,
   AdminInventoryRoute: AdminInventoryRoute,
   AdminKycRoute: AdminKycRoute,
   AdminLogisticsRoute: AdminLogisticsRoute,
   AdminNewAuctionRoute: AdminNewAuctionRoute,
   AdminPartnersRoute: AdminPartnersRoute,
   AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminProfileRoute: AdminProfileRoute,
   AdminRegisterUserRoute: AdminRegisterUserRoute,
   AdminReportsRoute: AdminReportsRoute,
+  AdminShowroomRoute: AdminShowroomRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminValuationRoute: AdminValuationRoute,
   AdminIndexRoute: AdminIndexRoute,

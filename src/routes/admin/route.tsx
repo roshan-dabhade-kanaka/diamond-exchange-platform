@@ -12,12 +12,15 @@ const nav = [
   { label: "Valuation Service", to: "/admin/valuation" },
   { label: "Auctions", to: "/admin/auctions" },
   { label: "Create Auction", to: "/admin/new-auction" },
-  { label: "Payments", to: "/admin/payments" },
+  { label: "Showroom", to: "/admin/showroom" },
+  { label: "Payments & Settlement", to: "/admin/payments" },
   { label: "Logistics", to: "/admin/logistics" },
   { label: "FOMIN / Partners", to: "/admin/partners" },
   { label: "Reports & Analytics", to: "/admin/reports" },
   { label: "Audit", to: "/admin/audit" },
+  { label: "Integrations", to: "/admin/integrations" },
   { label: "Platform Settings", to: "/admin/config" },
+  { label: "Profile", to: "/admin/profile" },
 ];
 
 const notifications = [

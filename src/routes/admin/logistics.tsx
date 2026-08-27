@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
 import {
@@ -10,7 +11,7 @@ import {
   PageHeader,
   Panel,
 } from "@/components/adex/kit";
-import { returnsRows, shipments } from "@/lib/adex-data";
+import { listings, returnsRows, shipments } from "@/lib/adex-data";
 
 export const Route = createFileRoute("/admin/logistics")({
   head: pageHead(
@@ -21,6 +22,10 @@ export const Route = createFileRoute("/admin/logistics")({
 });
 
 function AdminLogistics() {
+  const [exportStoneId, setExportStoneId] = useState("");
+  const targetStone = listings.find((l) => l.id === exportStoneId);
+  const canGenerate = targetStone ? targetStone.isKimberleyApproved : false;
+
   return (
     <>
       <PageHeader
@@ -105,18 +110,42 @@ function AdminLogistics() {
           ]}
         />
         <div className="mt-4">
+          <label className="mb-4 flex flex-col gap-1 text-xs font-semibold">
+            Stone / Lot ID
+            <select
+              value={exportStoneId}
+              onChange={(e) => setExportStoneId(e.target.value)}
+              className="h-9 w-full max-w-xs rounded-sm border border-input bg-background px-2 text-sm font-normal focus:border-ring focus:outline-none"
+            >
+              <option value="">Select an item…</option>
+              {listings.map((l) => (
+                <option key={l.id} value={l.id}>
+                  {l.id} — {l.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          {exportStoneId && !canGenerate ? (
+            <p className="mb-4 border-l-4 border-destructive bg-destructive/5 p-3 text-sm text-destructive">
+              Export documents cannot be generated for {exportStoneId} — its Kimberley Process
+              certificate is not yet approved. Approve the certificate before proceeding.
+            </p>
+          ) : null}
           <FormGrid
             fields={[
-              { label: "Stone / Lot ID" },
               { label: "Linked shipment" },
               { label: "Document type" },
               { label: "File", type: "file" },
             ]}
           />
           <div className="mt-4 flex gap-2">
-            <GoldButton>Upload against item</GoldButton>
-            <GhostButton>Verify</GhostButton>
-            <GhostButton>Download</GhostButton>
+            <GoldButton type="button" disabled={!canGenerate}>
+              Generate export document
+            </GoldButton>
+            <GhostButton type="button" disabled={!canGenerate}>
+              Verify
+            </GhostButton>
+            <GhostButton type="button">Download</GhostButton>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
             Documents must be attached to a stone or lot — standalone uploads are not accepted.
