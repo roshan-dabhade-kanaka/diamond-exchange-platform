@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { pageHead } from "@/lib/page-head";
-import { DataTable, DefinitionList, PageHeader, Panel } from "@/components/adex/kit";
-import { partners } from "@/lib/adex-data";
+import { DataTable, DefinitionList, PageHeader, Panel, StatusBadge } from "@/components/adex/kit";
+import { partners, settlements } from "@/lib/adex-data";
+import { formatUsd, settlementSplit } from "@/lib/rules";
 
 export const Route = createFileRoute("/admin/partners")({
   head: pageHead(
@@ -12,6 +13,11 @@ export const Route = createFileRoute("/admin/partners")({
 });
 
 function AdminPartners() {
+  const fominShareTotal = settlements.reduce((sum, s) => sum + settlementSplit(s.totalAmount).partner, 0);
+  const fominShareDrawn = settlements
+    .filter((s) => s.escrowStatus === "DISTRIBUTED")
+    .reduce((sum, s) => sum + settlementSplit(s.totalAmount).partner, 0);
+
   return (
     <>
       <PageHeader
@@ -25,21 +31,34 @@ function AdminPartners() {
           <DefinitionList
             items={[
               { label: "Facility size", value: "$5.00M" },
-              { label: "Drawn", value: "$2.10M" },
-              { label: "Available", value: "$2.90M" },
+              { label: "Partner share, all settlements (10%)", value: formatUsd(fominShareTotal) },
+              { label: "Distributed to date", value: formatUsd(fominShareDrawn) },
               { label: "Settlement cycle", value: "Monthly, 5th working day" },
             ]}
           />
         </Panel>
-        <Panel title="Settlement history">
-          <DataTable
-            dense
-            rows={[
-              { Settlement: "SET-1142", Partner: "FOMIN Facility A", Amount: "$412,900", Date: "05 Aug 2026", Status: "Completed" },
-              { Settlement: "SET-1128", Partner: "Brinks Global", Amount: "$18,440", Date: "05 Aug 2026", Status: "Completed" },
-              { Settlement: "SET-1119", Partner: "Antwerp Cutting House", Amount: "$96,200", Date: "01 Aug 2026", Status: "Pending" },
-            ]}
-          />
+        <Panel title="Settlement history — FOMIN share">
+          <div className="space-y-3">
+            {settlements.map((s) => {
+              const { partner } = settlementSplit(s.totalAmount);
+              return (
+                <div
+                  key={s.batch}
+                  className="flex items-center justify-between border-b border-border pb-3 text-sm last:border-0 last:pb-0"
+                >
+                  <div>
+                    <p className="font-semibold">
+                      {s.batch} — {s.seller}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatUsd(s.totalAmount)} total · FOMIN share {formatUsd(partner)}
+                    </p>
+                  </div>
+                  <StatusBadge value={s.escrowStatus === "DISTRIBUTED" ? "Completed" : "Pending"} />
+                </div>
+              );
+            })}
+          </div>
         </Panel>
       </div>
     </>
